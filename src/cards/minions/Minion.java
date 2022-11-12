@@ -10,7 +10,22 @@ public abstract class Minion {
     private String[] colors;
     private String name;
     boolean frozen;
+    boolean hasAttacked;
     int prefRow;
+
+    public void attack(Minion target) {
+        if (this.frozen) {
+            System.out.println("Attacker card is frozen.");
+            return;
+        }
+        if (this.hasAttacked) {
+            System.out.println("Attacker card has already attacked this turn.");
+            return;
+        }
+        //TODO: check is card belongs to enemy and tank cards
+        target.setHealth(target.getHealth() - this.attackDamage);
+        this.hasAttacked = true;
+    }
 
     public int getHealth() {
         return health;
@@ -74,6 +89,14 @@ public abstract class Minion {
 
     public void setPrefRow(int prefRow) {
         this.prefRow = prefRow;
+    }
+
+    public boolean getHasAttacked() {
+        return hasAttacked;
+    }
+
+    public void setHasAttacked(boolean hasAttacked) {
+        this.hasAttacked = hasAttacked;
     }
 
     @Override
