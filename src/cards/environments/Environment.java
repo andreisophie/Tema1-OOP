@@ -8,4 +8,6 @@ public abstract class Environment extends Card {
     }
 
     abstract void ability(int targetRow);
+
+
 }

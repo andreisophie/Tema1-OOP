@@ -1,5 +1,7 @@
 package cards;
 
+import java.util.Arrays;
+
 public abstract class Card {
     private int mana;
     private String description;
@@ -46,5 +48,15 @@ public abstract class Card {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Card{" +
+                "mana=" + mana +
+                ", description='" + description + '\'' +
+                ", colors=" + Arrays.toString(colors) +
+                ", name='" + name + '\'' +
+                '}';
     }
 }

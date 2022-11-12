@@ -1,13 +1,18 @@
 package main;
 
+import cards.Card;
+import cards.Deck;
 import checker.Checker;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import checker.CheckerConstants;
+import fileio.CardInput;
 import fileio.Input;
 import game.Game;
+import game.Player;
+import game.Helpers;
 
 import java.io.File;
 import java.io.IOException;
@@ -72,9 +77,22 @@ public final class Main {
 
         //TODO add here the entry point to your implementation
         if (Game.isInitialised() == false) {
-            System.out.println("Initializing...");
 
-
+            Deck deck;
+            Card card;
+            for (int playerIndex = 0; playerIndex < 2; playerIndex++) {
+                Game.players[playerIndex] = new Player();
+                Game.players[playerIndex].setNrDecks(inputData.getPlayerOneDecks().getNrDecks());
+                Game.players[playerIndex].setNrCardsInDeck(inputData.getPlayerOneDecks().getNrCardsInDeck());
+                for (int i = 0; i < Game.players[playerIndex].getNrDecks(); i++) {
+                    deck = new Deck();
+                    for (int j = 0; j < Game.players[playerIndex].getNrCardsInDeck(); j++) {
+                        CardInput cardInput = inputData.getPlayerOneDecks().getDecks().get(i).get(j);
+                        deck.cards.add(Helpers.CardInputToCard(cardInput));
+                    }
+                    Game.players[playerIndex].addDeck(deck);
+                }
+            }
 
             Game.setInitialised(true);
         }

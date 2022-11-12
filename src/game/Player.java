@@ -9,6 +9,13 @@ public class Player {
     private int nrDecks;
     private ArrayList<Deck> decks;
 
+    public Player() {
+        decks = new ArrayList<>();
+    }
+
+    public void addDeck(Deck deck) {
+        decks.add(deck);
+    }
     public int getNrCardsInDeck() {
         return nrCardsInDeck;
     }
@@ -31,5 +38,14 @@ public class Player {
 
     public void setDecks(ArrayList<Deck> decks) {
         this.decks = decks;
+    }
+
+    @Override
+    public String toString() {
+        return "Player{" +
+                "nrCardsInDeck=" + nrCardsInDeck +
+                ", nrDecks=" + nrDecks +
+                ", decks=" + decks +
+                '}';
     }
 }

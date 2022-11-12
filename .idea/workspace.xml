@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5e046a8c-579f-4ca0-a360-d3975cc356e3" name="Changes" comment="Created constructors for minions">
+    <list default="true" id="5e046a8c-579f-4ca0-a360-d3975cc356e3" name="Changes" comment="Created constructors for heroes and environments">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/game/Helpers.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkstyle.txt" beforeDir="false" afterPath="$PROJECT_DIR$/checkstyle.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cards/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cards/Card.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cards/Deck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cards/Deck.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/cards/environments/Environment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cards/environments/Environment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cards/environments/Firestorm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cards/environments/Firestorm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cards/environments/HeartHound.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cards/environments/HeartHound.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cards/environments/Winterfell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cards/environments/Winterfell.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cards/heroes/EmpressThorina.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cards/heroes/EmpressThorina.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cards/heroes/GeneralKocioraw.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cards/heroes/GeneralKocioraw.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cards/heroes/Hero.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cards/heroes/Hero.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cards/heroes/KingMudface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cards/heroes/KingMudface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cards/heroes/LordRoyce.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cards/heroes/LordRoyce.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/game/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/Player.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Main.java" afterDir="false" />
     </list>
@@ -49,7 +47,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="Application.Test">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="main.Main" />
       <module name="tema" />
@@ -78,8 +76,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Test" />
         <item itemvalue="Application.Main" />
+        <item itemvalue="Application.Test" />
       </list>
     </recent_temporary>
   </component>
@@ -141,7 +139,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668266228595</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Created constructors for heroes and environments">
+      <created>1668267341050</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1668267341050</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -163,6 +168,7 @@
     <MESSAGE value="Implemented Heroes" />
     <MESSAGE value="Started implementing game mechanics" />
     <MESSAGE value="Created constructors for minions" />
-    <option name="LAST_COMMIT_MESSAGE" value="Created constructors for minions" />
+    <MESSAGE value="Created constructors for heroes and environments" />
+    <option name="LAST_COMMIT_MESSAGE" value="Created constructors for heroes and environments" />
   </component>
 </project>

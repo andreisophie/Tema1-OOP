@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class Game {
     static public ArrayList<Minion>[] playground = new ArrayList[4];
     static private boolean initialised = false;
-    static public Player player1, player2;
+    static public Player[] players = new Player[2];
 
     public static boolean isInitialised() {
         return initialised;
