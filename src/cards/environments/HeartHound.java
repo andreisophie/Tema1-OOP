@@ -4,6 +4,10 @@ import cards.minions.Minion;
 import game.Game;
 
 public class HeartHound extends Environment {
+    public HeartHound(int mana, String description, String[] colors, String name) {
+        super(mana, description, colors, name);
+    }
+
     @Override
     void ability(int targetRow) {
         int targetIndex = -1;

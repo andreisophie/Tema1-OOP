@@ -3,7 +3,11 @@ package cards.heroes;
 import cards.minions.Minion;
 import game.Game;
 
-public class EmpressThorina extends Hero{
+public class EmpressThorina extends Hero {
+    public EmpressThorina(int mana, String description, String[] colors, String name) {
+        super(mana, description, colors, name);
+    }
+
     @Override
     void ability(int targetRow) {
         int targetIndex = -1;
