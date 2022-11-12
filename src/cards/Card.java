@@ -3,10 +3,10 @@ package cards;
 import java.util.Arrays;
 
 public abstract class Card {
-    private int mana;
-    private String description;
-    private String[] colors;
-    private String name;
+    private final int mana;
+    private final String description;
+    private final String[] colors;
+    private final String name;
 
     public Card(int mana,
                 String description,
@@ -22,32 +22,16 @@ public abstract class Card {
         return mana;
     }
 
-    public void setMana(int mana) {
-        this.mana = mana;
-    }
-
     public String getDescription() {
         return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public String[] getColors() {
         return colors;
     }
 
-    public void setColors(String[] colors) {
-        this.colors = colors;
-    }
-
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     @Override
