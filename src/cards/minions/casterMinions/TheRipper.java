@@ -11,7 +11,7 @@ public class TheRipper extends Minion implements Caster {
                     int health,
                     int attackDamage,
                     int prefRow) {
-        super(mana, description, colors, name, health, attackDamage, prefRow);
+        super(mana, description, colors, name, health, attackDamage, prefRow, false);
     }
 
     @Override

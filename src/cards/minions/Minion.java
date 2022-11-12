@@ -4,12 +4,13 @@ import cards.Card;
 
 import java.util.Arrays;
 
-public abstract class Minion extends Card {
+public class Minion extends Card {
     private int health;
     private int attackDamage;
     boolean frozen;
     boolean hasAttacked;
     int prefRow;
+    boolean isTank;
 
     public Minion(int mana,
                   String description,
@@ -17,13 +18,15 @@ public abstract class Minion extends Card {
                   String name,
                   int health,
                   int attackDamage,
-                  int prefRow) {
+                  int prefRow,
+                  boolean isTank) {
         super(mana, description, colors, name);
         this.health = health;
         this.attackDamage = attackDamage;
         this.prefRow = prefRow;
         this.frozen = true;
         this.hasAttacked = false;
+        this.isTank = isTank;
     }
 
     public void attack(Minion target) {
@@ -78,6 +81,14 @@ public abstract class Minion extends Card {
 
     public void setHasAttacked(boolean hasAttacked) {
         this.hasAttacked = hasAttacked;
+    }
+
+    public boolean isTank() {
+        return isTank;
+    }
+
+    public void setTank(boolean tank) {
+        isTank = tank;
     }
 
     @Override

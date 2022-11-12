@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5e046a8c-579f-4ca0-a360-d3975cc356e3" name="Changes" comment="Created constructors for heroes and environments">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/game/Helpers.java" afterDir="false" />
+    <list default="true" id="5e046a8c-579f-4ca0-a360-d3975cc356e3" name="Changes" comment="Implemented game initialisation">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/checkstyle.txt" beforeDir="false" afterPath="$PROJECT_DIR$/checkstyle.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cards/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cards/Card.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cards/Deck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cards/Deck.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cards/environments/Environment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cards/environments/Environment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/game/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/game/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cards/minions/Minion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cards/minions/Minion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cards/minions/StandardMinion.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cards/minions/casterMinions/Disciple.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cards/minions/casterMinions/Disciple.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cards/minions/casterMinions/Miraj.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cards/minions/casterMinions/Miraj.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cards/minions/casterMinions/TheCursedOne.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cards/minions/casterMinions/TheCursedOne.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cards/minions/casterMinions/TheRipper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cards/minions/casterMinions/TheRipper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/Helpers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/Helpers.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -146,7 +144,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668267341050</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Implemented game initialisation">
+      <created>1668271369342</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1668271369342</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -169,6 +174,7 @@
     <MESSAGE value="Started implementing game mechanics" />
     <MESSAGE value="Created constructors for minions" />
     <MESSAGE value="Created constructors for heroes and environments" />
-    <option name="LAST_COMMIT_MESSAGE" value="Created constructors for heroes and environments" />
+    <MESSAGE value="Implemented game initialisation" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implemented game initialisation" />
   </component>
 </project>
