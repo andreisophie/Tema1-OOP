@@ -3,12 +3,14 @@ package cards.minions;
 import java.util.Arrays;
 
 public abstract class Minion {
-    private int health;
     private int mana;
+    private int health;
     private int attackDamage;
     private String Description;
     private String[] colors;
     private String name;
+    boolean frozen;
+    int prefRow;
 
     public int getHealth() {
         return health;
@@ -56,6 +58,22 @@ public abstract class Minion {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public boolean isFrozen() {
+        return frozen;
+    }
+
+    public void setFrozen(boolean frozen) {
+        this.frozen = frozen;
+    }
+
+    public int getPrefRow() {
+        return prefRow;
+    }
+
+    public void setPrefRow(int prefRow) {
+        this.prefRow = prefRow;
     }
 
     @Override
