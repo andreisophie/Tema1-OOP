@@ -1,12 +1,12 @@
 package cards.environments;
 
 import cards.minions.Minion;
-import game.Playground;
+import game.Game;
 
 public class Winterfell extends Environment {
     @Override
     void ability(int targetRow) {
-        for (Minion target : Playground.table[targetRow]) {
+        for (Minion target : Game.playground[targetRow]) {
             target.setFrozen(true);
         }
     }

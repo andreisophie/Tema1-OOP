@@ -1,7 +1,7 @@
 package cards.environments;
 
 import cards.minions.Minion;
-import game.Playground;
+import game.Game;
 
 public class HeartHound extends Environment {
     @Override
@@ -10,7 +10,7 @@ public class HeartHound extends Environment {
         int targetHealth = -1;
         int index = -1;
 
-        for (Minion target : Playground.table[targetRow]) {
+        for (Minion target : Game.playground[targetRow]) {
             index++;
             if (target.getHealth() > targetHealth) {
                 targetIndex = index;
@@ -18,7 +18,7 @@ public class HeartHound extends Environment {
             }
         }
 
-        Minion transfer = Playground.table[targetRow].remove(targetIndex);
-        Playground.table[3 - targetRow].add(transfer);
+        Minion transfer = Game.playground[targetRow].remove(targetIndex);
+        Game.playground[3 - targetRow].add(transfer);
     }
 }

@@ -1,14 +1,14 @@
 package cards.heroes;
 
 import cards.minions.Minion;
-import game.Playground;
+import game.Game;
 
 public class LordRoyce extends Hero{
     @Override
     void ability(int targetRow) {
-        Minion target = Playground.table[targetRow].get(0);
+        Minion target = Game.playground[targetRow].get(0);
 
-        for (Minion minion : Playground.table[targetRow]) {
+        for (Minion minion : Game.playground[targetRow]) {
             if (minion.getAttackDamage() > target.getAttackDamage()) {
                 target = minion;
             }

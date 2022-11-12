@@ -1,7 +1,7 @@
 package cards.heroes;
 
 import cards.minions.Minion;
-import game.Playground;
+import game.Game;
 
 public class EmpressThorina extends Hero{
     @Override
@@ -10,7 +10,7 @@ public class EmpressThorina extends Hero{
         int targetHealth = -1;
         int index = -1;
 
-        for (Minion target : Playground.table[targetRow]) {
+        for (Minion target : Game.playground[targetRow]) {
             index++;
             if (target.getHealth() > targetHealth) {
                 targetIndex = index;
@@ -18,6 +18,6 @@ public class EmpressThorina extends Hero{
             }
         }
 
-        Playground.table[targetRow].remove(targetIndex);
+        Game.playground[targetRow].remove(targetIndex);
     }
 }

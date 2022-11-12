@@ -27,3 +27,22 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+/result/out_test01_game_start.json
+/result/out_test02_place_card.json
+/result/out_test03_place_card_invalid.json
+/result/out_test04_use_environment_card.json
+/result/out_test05_use_environment_card_invalid.json
+/result/out_test06_attack_card.json
+/result/out_test07_attack_card_invalid.json
+/result/out_test08_use_card_ability.json
+/result/out_test09_use_card_ability_invalid.json
+/result/out_test10_attack_hero.json
+/result/out_test11_attack_hero_invalid.json
+/result/out_test12_use_hero_ability_1.json
+/result/out_test13_use_hero_ability_1_invalid.json
+/result/out_test14_use_hero_ability_2.json
+/result/out_test15_use_hero_ability_2_invalid.json
+/result/out_test16_multiple_games_valid.json
+/result/out_test17_multiple_games_invalid.json
+/result/out_test18_big_game.json
+/out.txt
