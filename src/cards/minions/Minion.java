@@ -11,6 +11,21 @@ public abstract class Minion extends Card {
     boolean hasAttacked;
     int prefRow;
 
+    public Minion(int mana,
+                  String description,
+                  String[] colors,
+                  String name,
+                  int health,
+                  int attackDamage,
+                  int prefRow) {
+        super(mana, description, colors, name);
+        this.health = health;
+        this.attackDamage = attackDamage;
+        this.prefRow = prefRow;
+        this.frozen = true;
+        this.hasAttacked = false;
+    }
+
     public void attack(Minion target) {
         if (this.frozen) {
             System.out.println("Attacker card is frozen.");

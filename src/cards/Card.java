@@ -6,6 +6,16 @@ public abstract class Card {
     private String[] colors;
     private String name;
 
+    public Card(int mana,
+                String description,
+                String[] colors,
+                String name) {
+        this.mana = mana;
+        this.description = description;
+        this.colors = colors;
+        this.name = name;
+    }
+
     public int getMana() {
         return mana;
     }
