@@ -76,26 +76,12 @@ public final class Main {
         ArrayNode output = objectMapper.createArrayNode();
 
         //TODO add here the entry point to your implementation
-        if (Game.isInitialised() == false) {
-
-            Deck deck;
-            Card card;
-            for (int playerIndex = 0; playerIndex < 2; playerIndex++) {
-                Game.players[playerIndex] = new Player();
-                Game.players[playerIndex].setNrDecks(inputData.getPlayerOneDecks().getNrDecks());
-                Game.players[playerIndex].setNrCardsInDeck(inputData.getPlayerOneDecks().getNrCardsInDeck());
-                for (int i = 0; i < Game.players[playerIndex].getNrDecks(); i++) {
-                    deck = new Deck();
-                    for (int j = 0; j < Game.players[playerIndex].getNrCardsInDeck(); j++) {
-                        CardInput cardInput = inputData.getPlayerOneDecks().getDecks().get(i).get(j);
-                        deck.cards.add(Helpers.CardInputToCard(cardInput));
-                    }
-                    Game.players[playerIndex].addDeck(deck);
-                }
-            }
-
-            Game.setInitialised(true);
+        // initialize players:
+        if (!Game.isInitialised()) {
+            Helpers.initializePlayers(inputData);
         }
+
+        //
 
         ObjectWriter objectWriter = objectMapper.writerWithDefaultPrettyPrinter();
         objectWriter.writeValue(new File(filePath2), output);

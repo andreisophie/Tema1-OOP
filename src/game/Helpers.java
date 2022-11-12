@@ -1,6 +1,7 @@
 package game;
 
 import cards.Card;
+import cards.Deck;
 import cards.environments.Firestorm;
 import cards.environments.HeartHound;
 import cards.environments.Winterfell;
@@ -10,6 +11,7 @@ import cards.minions.casterMinions.Miraj;
 import cards.minions.casterMinions.TheCursedOne;
 import cards.minions.casterMinions.TheRipper;
 import fileio.CardInput;
+import fileio.Input;
 
 public class Helpers {
     static public Card CardInputToCard(CardInput cardInput) {
@@ -72,5 +74,36 @@ public class Helpers {
                     cardInput.getName());
             default -> null;
         };
+    }
+
+    static public void initializePlayers(Input inputData) {
+        Deck deck;
+        Card card;
+        // initialize player 1
+        Game.players[0] = new Player();
+        Game.players[0].setNrDecks(inputData.getPlayerOneDecks().getNrDecks());
+        Game.players[0].setNrCardsInDeck(inputData.getPlayerOneDecks().getNrCardsInDeck());
+        for (int i = 0; i < Game.players[0].getNrDecks(); i++) {
+            deck = new Deck();
+            for (int j = 0; j < Game.players[0].getNrCardsInDeck(); j++) {
+                CardInput cardInput = inputData.getPlayerOneDecks().getDecks().get(i).get(j);
+                deck.cards.add(Helpers.CardInputToCard(cardInput));
+            }
+            Game.players[0].addDeck(deck);
+        }
+        // initialize player 2
+        Game.players[1] = new Player();
+        Game.players[1].setNrDecks(inputData.getPlayerOneDecks().getNrDecks());
+        Game.players[1].setNrCardsInDeck(inputData.getPlayerOneDecks().getNrCardsInDeck());
+        for (int i = 0; i < Game.players[1].getNrDecks(); i++) {
+            deck = new Deck();
+            for (int j = 0; j < Game.players[1].getNrCardsInDeck(); j++) {
+                CardInput cardInput = inputData.getPlayerTwoDecks().getDecks().get(i).get(j);
+                deck.cards.add(Helpers.CardInputToCard(cardInput));
+            }
+            Game.players[1].addDeck(deck);
+        }
+
+        Game.setInitialised(true);
     }
 }

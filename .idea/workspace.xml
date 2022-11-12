@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5e046a8c-579f-4ca0-a360-d3975cc356e3" name="Changes" comment="Moved isTank field from StandardMinion to Minion&#10;Deleted StandardMinion&#10;Casters now extend Minion class and updated constructors">
+    <list default="true" id="5e046a8c-579f-4ca0-a360-d3975cc356e3" name="Changes" comment="Made fields final">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/checkstyle.txt" beforeDir="false" afterPath="$PROJECT_DIR$/checkstyle.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cards/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cards/Card.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/Helpers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/Helpers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -153,7 +154,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668271833419</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Made fields final">
+      <created>1668272152200</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1668272152200</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -178,6 +186,7 @@
     <MESSAGE value="Created constructors for heroes and environments" />
     <MESSAGE value="Implemented game initialisation" />
     <MESSAGE value="Moved isTank field from StandardMinion to Minion&#10;Deleted StandardMinion&#10;Casters now extend Minion class and updated constructors" />
-    <option name="LAST_COMMIT_MESSAGE" value="Moved isTank field from StandardMinion to Minion&#10;Deleted StandardMinion&#10;Casters now extend Minion class and updated constructors" />
+    <MESSAGE value="Made fields final" />
+    <option name="LAST_COMMIT_MESSAGE" value="Made fields final" />
   </component>
 </project>
