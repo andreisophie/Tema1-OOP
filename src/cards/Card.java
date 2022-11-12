@@ -36,11 +36,11 @@ public abstract class Card {
 
     @Override
     public String toString() {
-        return "Card{" +
-                "mana=" + mana +
-                ", description='" + description + '\'' +
-                ", colors=" + Arrays.toString(colors) +
-                ", name='" + name + '\'' +
+        return "{" +
+                "mana: " + mana +
+                ", description: '" + description + '\'' +
+                ", colors: " + Arrays.toString(colors) +
+                ", name: '" + name + '\'' +
                 '}';
     }
 }

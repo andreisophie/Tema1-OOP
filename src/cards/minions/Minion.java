@@ -93,13 +93,13 @@ public class Minion extends Card {
 
     @Override
     public String toString() {
-        return "Minion{" +
-                "health=" + health +
-                ", mana=" + this.getMana() +
-                ", attackDamage=" + attackDamage +
-                ", Description='" + this.getDescription() + '\'' +
-                ", colors=" + Arrays.toString(this.getColors()) +
-                ", name='" + this.getName() + '\'' +
+        return "{" +
+                "health: " + health +
+                ", mana: " + this.getMana() +
+                ", attackDamage: " + attackDamage +
+                ", Description: '" + this.getDescription() + '\'' +
+                ", colors: " + Arrays.toString(this.getColors()) +
+                ", name: '" + this.getName() + '\'' +
                 '}';
     }
 }

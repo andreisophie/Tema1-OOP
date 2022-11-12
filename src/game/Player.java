@@ -1,6 +1,7 @@
 package game;
 
 import cards.Deck;
+import cards.heroes.Hero;
 
 import java.util.ArrayList;
 
@@ -8,6 +9,9 @@ public class Player {
     private int nrCardsInDeck;
     private int nrDecks;
     private ArrayList<Deck> decks;
+    private Hero hero;
+    private Deck currentDeck;
+    private Deck hand;
 
     public Player() {
         decks = new ArrayList<>();
@@ -47,5 +51,29 @@ public class Player {
                 ", nrDecks=" + nrDecks +
                 ", decks=" + decks +
                 '}';
+    }
+
+    public Hero getHero() {
+        return hero;
+    }
+
+    public void setHero(Hero hero) {
+        this.hero = hero;
+    }
+
+    public Deck getCurrentDeck() {
+        return currentDeck;
+    }
+
+    public void setCurrentDeck(Deck currentDeck) {
+        this.currentDeck = currentDeck;
+    }
+
+    public Deck getHand() {
+        return hand;
+    }
+
+    public void setHand(Deck hand) {
+        this.hand = hand;
     }
 }

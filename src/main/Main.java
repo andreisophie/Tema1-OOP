@@ -77,8 +77,13 @@ public final class Main {
 
         //TODO add here the entry point to your implementation
         // initialize players:
-        if (!Game.isInitialised()) {
-            Helpers.initializePlayers(inputData);
+        Helpers.initializePlayers(inputData);
+
+        for (int i = 0; i < inputData.getGames().size(); i++) {
+            Helpers.initializeGame(inputData.getGames().get(i).getStartGame());
+            for (int j = 0; j < inputData.getGames().get(i).getActions().size(); j++) {
+                Helpers.runAction(inputData.getGames().get(i).getActions().get(j), output);
+            }
         }
 
         //

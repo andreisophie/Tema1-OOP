@@ -2,6 +2,8 @@ package cards.heroes;
 
 import cards.Card;
 
+import java.util.Arrays;
+
 public abstract class Hero extends Card {
     private int health = 30;
 
@@ -10,4 +12,15 @@ public abstract class Hero extends Card {
     }
 
     abstract void ability(int targetRow);
+
+    @Override
+    public String toString() {
+        return "{" +
+                "mana: " + super.getMana() +
+                ", description: '" + super.getDescription() + '\'' +
+                ", colors: " + Arrays.toString(super.getColors()) +
+                ", name: '" + super.getName() + '\'' +
+                ", health: " + health +
+                '}';
+    }
 }
