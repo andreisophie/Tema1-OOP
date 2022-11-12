@@ -39,14 +39,14 @@ public class Deck {
         return retString.toString();
     }
 
-    public String toJSON() {
-        ObjectMapper mapper = new ObjectMapper();
-        ArrayNode output = mapper.createArrayNode();
-
-        for (Card card : cards) {
-
-        }
-
-        ObjectNode result = JsonNodeFactory.instance.objectNode();
-    }
+//    public String toJSON() {
+//        ObjectMapper mapper = new ObjectMapper();
+//        ArrayNode output = mapper.createArrayNode();
+//
+//        for (Card card : cards) {
+//
+//        }
+//
+//        ObjectNode result = JsonNodeFactory.instance.objectNode();
+//    }
 }
