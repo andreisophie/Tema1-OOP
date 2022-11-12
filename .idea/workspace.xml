@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5e046a8c-579f-4ca0-a360-d3975cc356e3" name="Changes" comment="Implemented special minions">
+    <list default="true" id="5e046a8c-579f-4ca0-a360-d3975cc356e3" name="Changes" comment="Implemented attack for all minions">
+      <change afterPath="$PROJECT_DIR$/src/cards/Card.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/cards/environments/Environment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/cards/environments/Firestorm.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/cards/environments/HeartHound.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/cards/environments/Winterfell.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/cards/heroes/Hero.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/cards/heroes/LordRoyce.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/game/Playground.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/cards/minions/Minion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cards/minions/Minion.java" afterDir="false" />
     </list>
@@ -61,7 +69,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668255853170</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Implemented attack for all minions">
+      <created>1668256382712</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1668256382712</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -78,6 +93,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Added minion interfaces and abstract classes" />
     <MESSAGE value="Implemented special minions" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implemented special minions" />
+    <MESSAGE value="Implemented attack for all minions" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implemented attack for all minions" />
   </component>
 </project>

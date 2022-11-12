@@ -1,14 +1,12 @@
 package cards.minions;
 
+import cards.Card;
+
 import java.util.Arrays;
 
-public abstract class Minion {
-    private int mana;
+public abstract class Minion extends Card {
     private int health;
     private int attackDamage;
-    private String Description;
-    private String[] colors;
-    private String name;
     boolean frozen;
     boolean hasAttacked;
     int prefRow;
@@ -22,7 +20,7 @@ public abstract class Minion {
             System.out.println("Attacker card has already attacked this turn.");
             return;
         }
-        //TODO: check is card belongs to enemy and tank cards
+        //TODO: check if card belongs to enemy and tank cards
         target.setHealth(target.getHealth() - this.attackDamage);
         this.hasAttacked = true;
     }
@@ -35,44 +33,12 @@ public abstract class Minion {
         this.health = health;
     }
 
-    public int getMana() {
-        return mana;
-    }
-
-    public void setMana(int mana) {
-        this.mana = mana;
-    }
-
     public int getAttackDamage() {
         return attackDamage;
     }
 
     public void setAttackDamage(int attackDamage) {
         this.attackDamage = attackDamage;
-    }
-
-    public String getDescription() {
-        return Description;
-    }
-
-    public void setDescription(String description) {
-        Description = description;
-    }
-
-    public String[] getColors() {
-        return colors;
-    }
-
-    public void setColors(String[] colors) {
-        this.colors = colors;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public boolean isFrozen() {
@@ -103,11 +69,11 @@ public abstract class Minion {
     public String toString() {
         return "Minion{" +
                 "health=" + health +
-                ", mana=" + mana +
+                ", mana=" + this.getMana() +
                 ", attackDamage=" + attackDamage +
-                ", Description='" + Description + '\'' +
-                ", colors=" + Arrays.toString(colors) +
-                ", name='" + name + '\'' +
+                ", Description='" + this.getDescription() + '\'' +
+                ", colors=" + Arrays.toString(this.getColors()) +
+                ", name='" + this.getName() + '\'' +
                 '}';
     }
 }
