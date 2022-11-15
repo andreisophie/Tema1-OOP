@@ -17,6 +17,8 @@ public class Game {
     static public ArrayList<Minion>[] playground = new ArrayList[4];
     static public Player player1, player2;
     static public int currentPlayer;
+    static public int startingPlayer;
+    static public int turnNumber;
 
     public static Player getPlayerByIndex(int index) {
         if (index == 1)
@@ -66,9 +68,23 @@ public class Game {
         random = new Random(startGameInput.getShuffleSeed());
         Collections.shuffle(player2.getCurrentDeck().getCards(), random);
 
-        currentPlayer = startGameInput.getStartingPlayer();
+        startingPlayer = startGameInput.getStartingPlayer();
+        currentPlayer = startingPlayer;
+        turnNumber = 1;
+        player1.setMana(1);
+        player2.setMana(1);
 
         player1.getHand().getCards().add(player1.getCurrentDeck().getCards().remove(0));
         player2.getHand().getCards().add(player2.getCurrentDeck().getCards().remove(0));
+    }
+
+    static public void endTurn() {
+        currentPlayer = 1 + currentPlayer % 2;
+
+        if (currentPlayer == startingPlayer) {
+            turnNumber++;
+            player1.setMana(player1.getMana() + turnNumber);
+            player2.setMana(player2.getMana() + turnNumber);
+        }
     }
 }

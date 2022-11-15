@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5e046a8c-579f-4ca0-a360-d3975cc356e3" name="Changes" comment="Refactored helper classes">
+    <list default="true" id="5e046a8c-579f-4ca0-a360-d3975cc356e3" name="Changes" comment="Fixed shuffle&#10;TEST 1 WORKS NOW!!! &lt;3">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/checkstyle.txt" beforeDir="false" afterPath="$PROJECT_DIR$/checkstyle.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/game/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helpers/Debug.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/Debug.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -205,7 +206,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668541508009</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Fixed shuffle&#10;TEST 1 WORKS NOW!!! &lt;3">
+      <created>1668542135581</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1668542135581</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -236,6 +244,7 @@
     <MESSAGE value="Commented incomplete code" />
     <MESSAGE value="Implemented JSON output" />
     <MESSAGE value="Refactored helper classes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactored helper classes" />
+    <MESSAGE value="Fixed shuffle&#10;TEST 1 WORKS NOW!!! &lt;3" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed shuffle&#10;TEST 1 WORKS NOW!!! &lt;3" />
   </component>
 </project>

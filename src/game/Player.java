@@ -12,6 +12,7 @@ public class Player {
     private Hero hero;
     private Deck currentDeck;
     private Deck hand;
+    private int mana = 0;
 
     public Player() {
         decks = new ArrayList<>();
@@ -75,5 +76,13 @@ public class Player {
 
     public void setHand(Deck hand) {
         this.hand = hand;
+    }
+
+    public int getMana() {
+        return mana;
+    }
+
+    public void setMana(int mana) {
+        this.mana = mana;
     }
 }

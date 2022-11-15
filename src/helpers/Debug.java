@@ -29,6 +29,9 @@ public class Debug {
             case "getPlayerTurn":
                 result.put("output", Game.currentPlayer);
                 break;
+            case "endPlayerTurn":
+                Game.endTurn();
+                break;
             default:
                 System.out.println("Action not recognised or implemented");
         }
