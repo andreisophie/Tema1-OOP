@@ -3,7 +3,7 @@ package cards.minions;
 import cards.Card;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import game.Helpers;
+import helpers.Helpers;
 
 import java.util.Arrays;
 

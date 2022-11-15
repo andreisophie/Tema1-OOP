@@ -1,4 +1,4 @@
-package game;
+package helpers;
 
 import cards.Card;
 import cards.environments.Firestorm;

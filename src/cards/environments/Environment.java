@@ -3,7 +3,7 @@ package cards.environments;
 import cards.Card;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import game.Helpers;
+import helpers.Helpers;
 
 public abstract class Environment extends Card {
     public Environment(int mana, String description, String[] colors, String name) {
