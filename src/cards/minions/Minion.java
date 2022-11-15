@@ -1,6 +1,9 @@
 package cards.minions;
 
 import cards.Card;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import game.Helpers;
 
 import java.util.Arrays;
 
@@ -89,6 +92,22 @@ public class Minion extends Card {
 
     public void setTank(boolean tank) {
         isTank = tank;
+    }
+
+    public ObjectNode toJSON() {
+        ObjectNode minionNode = Helpers.mapper.createObjectNode();
+        minionNode.put("mana", getMana());
+        minionNode.put("attackDamage", getAttackDamage());
+        minionNode.put("health", getHealth());
+        minionNode.put("description", getDescription());
+        ArrayNode colorsNode = Helpers.mapper.createArrayNode();
+        for (String color : getColors()) {
+            colorsNode.add(color);
+        }
+        minionNode.put("colors", colorsNode);
+        minionNode.put("name", getName());
+
+        return minionNode;
     }
 
     @Override

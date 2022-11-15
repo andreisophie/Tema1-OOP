@@ -1,18 +1,14 @@
 package main;
 
-import cards.Card;
-import cards.Deck;
 import checker.Checker;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import checker.CheckerConstants;
-import fileio.CardInput;
 import fileio.Input;
+import game.Debug;
 import game.Game;
-import game.Player;
-import game.Helpers;
 
 import java.io.File;
 import java.io.IOException;
@@ -77,12 +73,12 @@ public final class Main {
 
         //TODO add here the entry point to your implementation
         // initialize players:
-        Helpers.initializePlayers(inputData);
+        Game.initializePlayers(inputData);
 
         for (int i = 0; i < inputData.getGames().size(); i++) {
-            Helpers.initializeGame(inputData.getGames().get(i).getStartGame());
+            Game.initializeGame(inputData.getGames().get(i).getStartGame());
             for (int j = 0; j < inputData.getGames().get(i).getActions().size(); j++) {
-                Helpers.runAction(inputData.getGames().get(i).getActions().get(j), output);
+                Debug.runAction(inputData.getGames().get(i).getActions().get(j), output);
             }
         }
 

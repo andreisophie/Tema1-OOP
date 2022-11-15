@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import game.Helpers;
 
 import java.util.ArrayList;
 
@@ -39,14 +40,13 @@ public class Deck {
         return retString.toString();
     }
 
-//    public String toJSON() {
-//        ObjectMapper mapper = new ObjectMapper();
-//        ArrayNode output = mapper.createArrayNode();
-//
-//        for (Card card : cards) {
-//
-//        }
-//
-//        ObjectNode result = JsonNodeFactory.instance.objectNode();
-//    }
+    public ArrayNode toJSON() {
+        ArrayNode deckArray = Helpers.mapper.createArrayNode();
+
+        for (Card card : cards) {
+            deckArray.add(card.toJSON());
+        }
+
+        return deckArray;
+    }
 }

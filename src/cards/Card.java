@@ -1,5 +1,7 @@
 package cards;
 
+import com.fasterxml.jackson.databind.node.ObjectNode;
+
 import java.util.Arrays;
 
 public abstract class Card {
@@ -34,6 +36,7 @@ public abstract class Card {
         return name;
     }
 
+    public abstract ObjectNode toJSON();
     @Override
     public String toString() {
         return "{" +
