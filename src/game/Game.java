@@ -26,7 +26,6 @@ public class Game {
 
     static public void initializePlayers(Input inputData) {
         Deck deck;
-        Card card;
         // initialize player 1
         player1 = new Player();
         player1.setNrDecks(inputData.getPlayerOneDecks().getNrDecks());
@@ -63,9 +62,9 @@ public class Game {
         player2.setCurrentDeck(new Deck(player2.getDecks().get(startGameInput.getPlayerTwoDeckIdx())));
 
         Random random = new Random(startGameInput.getShuffleSeed());
-        Collections.shuffle(player1.getCurrentDeck().getCards());
+        Collections.shuffle(player1.getCurrentDeck().getCards(), random);
         random = new Random(startGameInput.getShuffleSeed());
-        Collections.shuffle(player2.getCurrentDeck().getCards());
+        Collections.shuffle(player2.getCurrentDeck().getCards(), random);
 
         currentPlayer = startGameInput.getStartingPlayer();
 
