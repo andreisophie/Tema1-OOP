@@ -70,7 +70,7 @@ public abstract class Hero extends Card {
         for (String color : getColors()) {
             colorsNode.add(color);
         }
-        heroNode.put("colors", colorsNode);
+        heroNode.set("colors", colorsNode);
         heroNode.put("name", getName());
         heroNode.put("health", getHealth());
 
