@@ -10,10 +10,10 @@ import java.util.Arrays;
 public class Minion extends Card {
     private int health;
     private int attackDamage;
-    boolean frozen;
-    boolean hasAttacked;
-    int prefRow;
-    boolean isTank;
+    private boolean frozen;
+    private boolean hasAttacked;
+    private int prefRow;
+    private boolean isTank;
 
     public Minion(int mana,
                   String description,
@@ -104,7 +104,7 @@ public class Minion extends Card {
         for (String color : getColors()) {
             colorsNode.add(color);
         }
-        minionNode.put("colors", colorsNode);
+        minionNode.set("colors", colorsNode);
         minionNode.put("name", getName());
 
         return minionNode;

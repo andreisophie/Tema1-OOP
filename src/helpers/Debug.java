@@ -14,26 +14,21 @@ public class Debug {
         ObjectNode result = JsonNodeFactory.instance.objectNode();
         result.put("command", actionInput.getCommand());
         switch (actionInput.getCommand()) {
-            case "getPlayerDeck":
+            case "getPlayerDeck" -> {
                 result.put("playerIdx", actionInput.getPlayerIdx());
-                result.put("output", Game.getPlayerByIndex(actionInput.getPlayerIdx()).getCurrentDeck().toJSON());
-                break;
-            case "getPlayerHero":
+                result.set("output", Game.getPlayerByIndex(actionInput.getPlayerIdx()).getCurrentDeck().toJSON());
+            }
+            case "getPlayerHero" -> {
                 result.put("playerIdx", actionInput.getPlayerIdx());
-                result.put("output", Game.getPlayerByIndex(actionInput.getPlayerIdx()).getHero().toJSON());
-                break;
-            case "getCardsInHand":
+                result.set("output", Game.getPlayerByIndex(actionInput.getPlayerIdx()).getHero().toJSON());
+            }
+            case "getCardsInHand" -> {
                 result.put("playerIdx", actionInput.getPlayerIdx());
-                result.put("output", Game.getPlayerByIndex(actionInput.getPlayerIdx()).getHand().toJSON());
-                break;
-            case "getPlayerTurn":
-                result.put("output", Game.currentPlayer);
-                break;
-            case "endPlayerTurn":
-                Game.endTurn();
-                break;
-            default:
-                System.out.println("Action not recognised or implemented");
+                result.set("output", Game.getPlayerByIndex(actionInput.getPlayerIdx()).getHand().toJSON());
+            }
+            case "getPlayerTurn" -> result.put("output", Game.currentPlayer);
+            case "endPlayerTurn" -> Game.endTurn();
+            default -> System.out.println("Action not recognised or implemented");
         }
 
         output.add(result);
