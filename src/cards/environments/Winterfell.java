@@ -1,6 +1,5 @@
 package cards.environments;
 
-import cards.Card;
 import cards.minions.Minion;
 import game.Game;
 
@@ -11,12 +10,6 @@ public class Winterfell extends Environment {
 
     public Winterfell(Environment environment) {
         super(environment);
-    }
-
-    @Override
-    public Card cloneCard() {
-        Winterfell clone = new Winterfell(this);
-        return clone;
     }
 
     @Override

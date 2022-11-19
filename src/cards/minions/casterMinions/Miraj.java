@@ -20,7 +20,7 @@ public class Miraj extends Minion implements Caster {
     }
 
     @Override
-    public Card cloneCard() {
+    public Card cloneMinion() {
         Miraj clone = new Miraj(this);
         return clone;
     }

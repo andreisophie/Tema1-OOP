@@ -89,6 +89,8 @@ public class Game {
             player2.addDeck(deck);
         }
         player2.setHand(new Deck());
+
+        Statistics.resetGamesPlayed();
     }
 
     static public void initializeGame(StartGameInput startGameInput) {

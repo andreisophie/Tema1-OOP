@@ -20,7 +20,7 @@ public class TheRipper extends Minion implements Caster {
     }
 
     @Override
-    public Card cloneCard() {
+    public Card cloneMinion() {
         TheRipper clone = new TheRipper(this);
         return clone;
     }

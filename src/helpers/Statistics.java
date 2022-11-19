@@ -9,6 +9,10 @@ import game.Game;
 public class Statistics {
     static private int gamesPlayed = 0;
 
+    static public void resetGamesPlayed() {
+        gamesPlayed = 0;
+    }
+
     static public void incrementGamesPlayed() {
         gamesPlayed++;
     }

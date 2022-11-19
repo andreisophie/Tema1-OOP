@@ -8,7 +8,7 @@ import helpers.Helpers;
 
 import java.util.Arrays;
 
-public class Minion extends Card {
+public class Minion extends Card implements Cloneable {
     private int health;
     private int attackDamage;
     private boolean frozen;
@@ -43,7 +43,7 @@ public class Minion extends Card {
         this.isTank = minion.isTank;
     }
 
-    public Card cloneCard() {
+    public Card cloneMinion() {
         Minion clone = new Minion(this);
         return clone;
     }

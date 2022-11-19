@@ -10,10 +10,10 @@ public abstract class Card {
     private final String[] colors;
     private final String name;
 
-    public Card(int mana,
-                String description,
-                String[] colors,
-                String name) {
+    public Card(final int mana,
+                final String description,
+                final String[] colors,
+                final String name) {
         this.mana = mana;
         this.description = description;
         this.colors = colors;
@@ -37,8 +37,6 @@ public abstract class Card {
     }
 
     public abstract ObjectNode toJSON();
-
-    public abstract Card cloneCard();
 
     @Override
     public String toString() {

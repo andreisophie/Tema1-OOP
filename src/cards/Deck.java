@@ -19,7 +19,7 @@ public class Deck {
 
         for (Card card : deck.getCards()) {
             if (card instanceof Minion) {
-                cards.add(card.cloneCard());
+                cards.add(((Minion) card).cloneMinion());
             } else {
                 cards.add(card);
             }

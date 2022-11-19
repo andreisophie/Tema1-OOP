@@ -1,6 +1,5 @@
 package cards.environments;
 
-import cards.Card;
 import cards.minions.Minion;
 import game.Game;
 
@@ -11,12 +10,6 @@ public class Firestorm extends Environment {
 
     public Firestorm(Environment environment) {
         super(environment);
-    }
-
-    @Override
-    public Card cloneCard() {
-        Firestorm clone = new Firestorm(this);
-        return clone;
     }
 
     @Override
