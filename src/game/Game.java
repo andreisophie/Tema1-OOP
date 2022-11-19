@@ -210,8 +210,9 @@ public class Game {
             return "Attacker card is frozen.";
         }
 
-        if (Helpers.enemyHasTank() && (!target.isTank())) {
-            return "Attacked card is not of type 'Tank'.";
+        if (Helpers.enemyHasTank()) {
+            if (target.isTank() == false)
+                return "Attacked card is not of type 'Tank'.";
         }
 
         attacker.attack(target);

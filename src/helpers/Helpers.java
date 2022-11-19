@@ -182,12 +182,12 @@ public class Helpers {
 
     public static boolean enemyHasTank() {
         if (Game.currentPlayer == 1) {
-            for (Minion minion : Game.playground[2]) {
+            for (Minion minion : Game.playground[1]) {
                 if (minion.isTank())
                     return true;
             }
         } else {
-            for (Minion minion : Game.playground[1]) {
+            for (Minion minion : Game.playground[2]) {
                 if (minion.isTank())
                     return true;
             }

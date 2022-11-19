@@ -33,14 +33,6 @@ public class Minion extends Card {
     }
 
     public void attack(Minion target) {
-        if (this.frozen) {
-            System.out.println("Attacker card is frozen.");
-            return;
-        }
-        if (this.hasAttacked) {
-            System.out.println("Attacker card has already attacked this turn.");
-            return;
-        }
         target.setHealth(target.getHealth() - this.attackDamage);
         this.hasAttacked = true;
     }
