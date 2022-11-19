@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5e046a8c-579f-4ca0-a360-d3975cc356e3" name="Changes" comment="Implementet gameplay until test 6">
+    <list default="true" id="5e046a8c-579f-4ca0-a360-d3975cc356e3" name="Changes" comment="Fixed test 6">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cards/minions/Minion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cards/minions/Minion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkstyle.txt" beforeDir="false" afterPath="$PROJECT_DIR$/checkstyle.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cards/minions/casterMinions/Disciple.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cards/minions/casterMinions/Disciple.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/cards/minions/casterMinions/Miraj.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cards/minions/casterMinions/Miraj.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cards/minions/casterMinions/TheCursedOne.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cards/minions/casterMinions/TheCursedOne.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cards/minions/casterMinions/TheRipper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cards/minions/casterMinions/TheRipper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/game/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/helpers/Helpers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/Helpers.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,7 +54,7 @@
       <recent name="helpers" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="Application.Test">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="main.Main" />
       <module name="tema" />
@@ -81,8 +83,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main" />
         <item itemvalue="Application.Test" />
+        <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
   </component>
@@ -242,7 +244,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668863801224</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="Fixed test 6">
+      <created>1668864894302</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1668864894302</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -278,17 +287,7 @@
     <MESSAGE value="Updated tests" />
     <MESSAGE value="Fixed tests" />
     <MESSAGE value="Implementet gameplay until test 6" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implementet gameplay until test 6" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/game/Game.java</url>
-          <line>212</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="Fixed test 6" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed test 6" />
   </component>
 </project>

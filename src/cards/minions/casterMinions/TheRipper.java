@@ -22,6 +22,6 @@ public class TheRipper extends Minion implements Caster {
         }
         target.setAttackDamage(targetAttack);
 
-        this.setFrozen(true);
+        this.setHasAttacked(true);
     }
 }

@@ -20,6 +20,6 @@ public class Miraj extends Minion implements Caster {
         target.setHealth(this.getHealth());
         this.setHealth(targetHealth);
 
-        this.setFrozen(true);
+        this.setHasAttacked(true);
     }
 }

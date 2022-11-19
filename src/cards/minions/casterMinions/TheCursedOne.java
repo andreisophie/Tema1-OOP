@@ -19,8 +19,7 @@ public class TheCursedOne extends Minion implements Caster {
         int targetHealth = target.getHealth();
         target.setHealth(target.getAttackDamage());
         target.setAttackDamage(targetHealth);
-        // TODO check if minion is dead
 
-        this.setFrozen(true);
+        this.setHasAttacked(true);
     }
 }

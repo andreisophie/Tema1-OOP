@@ -5,7 +5,9 @@ import cards.Deck;
 import cards.environments.Environment;
 import cards.environments.HeartHound;
 import cards.heroes.Hero;
+import cards.minions.Caster;
 import cards.minions.Minion;
+import cards.minions.casterMinions.Disciple;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
@@ -120,8 +122,12 @@ public class Game {
             turnNumber++;
             player1.setMana(player1.getMana() + (Math.min(turnNumber, 10)));
             player2.setMana(player2.getMana() + (Math.min(turnNumber, 10)));
-            player1.getHand().getCards().add(player1.getCurrentDeck().getCards().remove(0));
-            player2.getHand().getCards().add(player2.getCurrentDeck().getCards().remove(0));
+            if (player1.getCurrentDeck().getCards().size() > 0) {
+                player1.getHand().getCards().add(player1.getCurrentDeck().getCards().remove(0));
+            }
+            if (player2.getCurrentDeck().getCards().size() > 0) {
+                player2.getHand().getCards().add(player2.getCurrentDeck().getCards().remove(0));
+            }
         }
     }
 
@@ -210,12 +216,49 @@ public class Game {
             return "Attacker card is frozen.";
         }
 
-        if (Helpers.enemyHasTank()) {
-            if (target.isTank() == false)
+        if (Helpers.enemyHasTank() && !target.isTank()) {
                 return "Attacked card is not of type 'Tank'.";
         }
 
         attacker.attack(target);
+        removeDeadMinions();
+
+        return null;
+    }
+
+    static public String minionAbility(int attackerRow, int attackerIndex,
+                                      int targetRow, int targetIndex) {
+        Minion attacker = Helpers.getMinionAtPosition(attackerRow, attackerIndex);
+        Minion target = Helpers.getMinionAtPosition(targetRow, targetIndex);
+
+        if (attacker == null || target == null) {
+            System.out.println("Invalid cards for cardUsesAbility command");
+            return null;
+        }
+
+        if (attacker.isFrozen()) {
+            return "Attacker card is frozen.";
+        }
+
+        if (attacker.getHasAttacked()) {
+            return "Attacker card has already attacked this turn.";
+        }
+
+        if (attacker instanceof Disciple) {
+            if (Helpers.rowBelongsToEnemy(targetRow)) {
+                return "Attacked card does not belong to the current player.";
+            }
+        } else {
+            if (!Helpers.rowBelongsToEnemy(targetRow)) {
+                return "Attacked card does not belong to the enemy.";
+            }
+
+            if (Helpers.enemyHasTank() && !target.isTank()) {
+                return "Attacked card is not of type 'Tank'.";
+            }
+        }
+
+        ((Caster)attacker).ability(target);
         removeDeadMinions();
 
         return null;
@@ -248,6 +291,18 @@ public class Game {
             }
             case "cardUsesAttack" -> {
                 String error = minionAttack(actionInput.getCardAttacker().getX(),
+                        actionInput.getCardAttacker().getY(),
+                        actionInput.getCardAttacked().getX(),
+                        actionInput.getCardAttacked().getY());
+                if (error == null) {
+                    return;
+                }
+                result.set("cardAttacker", Helpers.coordinatesToJSON(actionInput.getCardAttacker()));
+                result.set("cardAttacked", Helpers.coordinatesToJSON(actionInput.getCardAttacked()));
+                result.put("error", error);
+            }
+            case "cardUsesAbility" -> {
+                String error = minionAbility(actionInput.getCardAttacker().getX(),
                         actionInput.getCardAttacker().getY(),
                         actionInput.getCardAttacked().getX(),
                         actionInput.getCardAttacked().getY());
