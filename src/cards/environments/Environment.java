@@ -6,14 +6,25 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import helpers.Helpers;
 
 public abstract class Environment extends Card {
-    public Environment(int mana, String description, String[] colors, String name) {
+    public Environment(final int mana,
+                       final String description,
+                       final String[] colors,
+                       final String name) {
         super(mana, description, colors, name);
     }
 
-    public Environment(Environment environment) {
-        super(environment.getMana(), environment.getDescription(), environment.getColors(), environment.getName());
+    public Environment(final Environment environment) {
+        super(environment.getMana(),
+                environment.getDescription(),
+                environment.getColors(),
+                environment.getName());
     }
 
+    /**
+     *
+     * @return an ObjectNode of current instance in JSON format,
+     * to be used for output
+     */
     @Override
     public ObjectNode toJSON() {
         ObjectNode environmentNode = Helpers.mapper.createObjectNode();
@@ -30,7 +41,11 @@ public abstract class Environment extends Card {
         return environmentNode;
     }
 
-    abstract public void ability(int targetRow);
+    /**
+     *
+     * @param targetRow casts the ability of this instance of Environment on target row
+     */
+    public abstract void ability(int targetRow);
 
 
 }

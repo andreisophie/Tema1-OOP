@@ -16,6 +16,7 @@ import fileio.ActionsInput;
 import fileio.CardInput;
 import fileio.Input;
 import fileio.StartGameInput;
+import helpers.Constants;
 import helpers.Debug;
 import helpers.Helpers;
 import helpers.Statistics;
@@ -25,43 +26,67 @@ import java.util.Collections;
 import java.util.Random;
 
 public class Game {
-    static public ArrayList<Minion>[] playground = new ArrayList[4];
-    static public Player player1, player2;
-    static public int currentPlayer;
-    static public int startingPlayer;
-    static public int turnNumber;
+    public static ArrayList<Minion>[] playground = new ArrayList[Constants.maxRowIndex];
+    public static Player player1, player2;
+    public static int currentPlayer;
+    public static int startingPlayer;
+    public static int turnNumber;
 
-    public static Player getPlayerByIndex(int index) {
-        if (index == 1)
+    /**
+     * returns a player object by its index
+     * @param index index of player to be returned
+     * @return player with requested index
+     */
+    public static Player getPlayerByIndex(final int index) {
+        if (index == 1) {
             return player1;
+        }
         return player2;
     }
 
+    /**
+     *
+     * @return Player object currently on their turn
+     */
     public static Player getCurrentPlayer() {
         return getPlayerByIndex(currentPlayer);
     }
 
+    /**
+     * returns the enemy of the player currently on their turn
+     * @return Player object waiting for the enemy's turn
+     */
     public static Player getEnemyPlayer() {
         return getPlayerByIndex(1 + currentPlayer % 2);
     }
 
-    public static int getRowForMinion(Minion minion) {
+    /**
+     * returns the row where a minion should be placed
+     * also considers the player currently on their turn
+     * @param minion minion to check for target row
+     * @return index of the row where the minion should be placed
+     */
+    public static int getRowForMinion(final Minion minion) {
         if (currentPlayer == 1) {
             if (minion.getPrefRow() == 0) {
-                return 3;
+                return Constants.player1_BackRow;
             } else {
-                return 2;
+                return Constants.player1_FrontRow;
             }
         } else {
             if (minion.getPrefRow() == 0) {
-                return 0;
+                return Constants.player2_BackRow;
             } else {
-                return 1;
+                return Constants.player2_FrontRow;
             }
         }
     }
 
-    static public void initializePlayers(Input inputData) {
+    /**
+     * Initializes players
+     * @param inputData object which contains the data to initialize players
+     */
+     public static void initializePlayers(final Input inputData) {
         Deck deck;
         // initialize player 1
         player1 = new Player();
@@ -93,12 +118,18 @@ public class Game {
         Statistics.resetGamesPlayed();
     }
 
-    static public void initializeGame(StartGameInput startGameInput) {
+    /**
+     * Initializes a match
+     * @param startGameInput object which contains data used to initialize match
+     */
+    public static void initializeGame(final StartGameInput startGameInput) {
         player1.setHero((Hero) Helpers.CardInputToCard(startGameInput.getPlayerOneHero()));
         player2.setHero((Hero) Helpers.CardInputToCard(startGameInput.getPlayerTwoHero()));
 
-        player1.setCurrentDeck(new Deck(player1.getDecks().get(startGameInput.getPlayerOneDeckIdx())));
-        player2.setCurrentDeck(new Deck(player2.getDecks().get(startGameInput.getPlayerTwoDeckIdx())));
+        player1.setCurrentDeck(
+                new Deck(player1.getDecks().get(startGameInput.getPlayerOneDeckIdx())));
+        player2.setCurrentDeck(
+                new Deck(player2.getDecks().get(startGameInput.getPlayerTwoDeckIdx())));
 
         Random random = new Random(startGameInput.getShuffleSeed());
         Collections.shuffle(player1.getCurrentDeck().getCards(), random);
@@ -111,7 +142,7 @@ public class Game {
         player1.setMana(1);
         player2.setMana(1);
 
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < Constants.maxRowIndex; i++) {
             playground[i] = new ArrayList<>();
         }
 
@@ -119,8 +150,11 @@ public class Game {
         player2.getHand().getCards().add(player2.getCurrentDeck().getCards().remove(0));
     }
 
-    static public void cleanupGame() {
-        for (int i = 0; i < 4; i++) {
+    /**
+     * refreshes variables in preparation of next match
+     */
+    public static void cleanupGame() {
+        for (int i = 0; i < Constants.maxRowIndex; i++) {
             playground[i].clear();
         }
 
@@ -134,15 +168,20 @@ public class Game {
         player2.setHero(null);
     }
 
-    static public void endTurn() {
+    /**
+     * ends the turn of the current player
+     * gives players mana
+     * draws next card for players
+     */
+    public static void endTurn() {
         Helpers.unfreezeMinions(currentPlayer);
 
         currentPlayer = 1 + currentPlayer % 2;
 
         if (currentPlayer == startingPlayer) {
             turnNumber++;
-            player1.setMana(player1.getMana() + (Math.min(turnNumber, 10)));
-            player2.setMana(player2.getMana() + (Math.min(turnNumber, 10)));
+            player1.setMana(player1.getMana() + (Math.min(turnNumber, Constants.maxManaPerTurn)));
+            player2.setMana(player2.getMana() + (Math.min(turnNumber, Constants.maxManaPerTurn)));
             if (player1.getCurrentDeck().getCards().size() > 0) {
                 player1.getHand().getCards().add(player1.getCurrentDeck().getCards().remove(0));
             }
@@ -152,7 +191,12 @@ public class Game {
         }
     }
 
-    static public String placeCard(int handIndex) {
+    /**
+     * checks if placing a minion is possible and places them if yes
+     * @param handIndex index of the minion held by current player
+     * @return an error as String if the action is illegal, null if legal
+     */
+    public static String placeCard(final int handIndex) {
         Card card = Game.getCurrentPlayer().getHand().getCards().get(handIndex);
 
         if (card instanceof Environment) {
@@ -163,7 +207,7 @@ public class Game {
             return "Not enough mana to place card on table.";
         }
 
-        if (Game.playground[getRowForMinion((Minion) card)].size() == 5) {
+        if (Game.playground[getRowForMinion((Minion) card)].size() == Constants.maxMinionsPerRow) {
             return "Cannot place card on table since row is full.";
         }
 
@@ -174,7 +218,13 @@ public class Game {
         return null;
     }
 
-    static public String useEnvironmentCard(int handIndex, int targetRow) {
+    /**
+     * wrapper for using an environment card held by the current player
+     * @param handIndex index of the card in the current player's hand
+     * @param targetRow the targeted row for the environment card
+     * @return an error as String if the action is illegal, null if legal
+     */
+    public static String useEnvironmentCard(final int handIndex, final int targetRow) {
         Card card = Game.getCurrentPlayer().getHand().getCards().get(handIndex);
 
         if (!(card instanceof  Environment)) {
@@ -190,12 +240,12 @@ public class Game {
         }
 
         if (card instanceof HeartHound) {
-            if (playground[Helpers.getMirrorRow(targetRow)].size() == 5) {
+            if (playground[Helpers.getMirrorRow(targetRow)].size() == Constants.maxMinionsPerRow) {
                 return "Cannot steal enemy card since the player's row is full.";
             }
         }
 
-        ((Environment)card).ability(targetRow);
+        ((Environment) card).ability(targetRow);
         removeDeadMinions();
         getCurrentPlayer().getHand().getCards().remove(handIndex);
         getCurrentPlayer().setMana(Game.getCurrentPlayer().getMana() - card.getMana());
@@ -203,8 +253,11 @@ public class Game {
         return null;
     }
 
-    static public void removeDeadMinions() {
-        for (int i = 0; i < 4; i++) {
+    /**
+     * removes dead minions from the playground (with 0 or less HP)
+     */
+     public static void removeDeadMinions() {
+        for (int i = 0; i < Constants.maxRowIndex; i++) {
             ArrayList<Minion> newRow = new ArrayList<>();
             for (Minion minion : Game.playground[i]) {
                 if (minion.getHealth() > 0) {
@@ -215,7 +268,14 @@ public class Game {
         }
     }
 
-    static public String minionAttackHero(int attackerRow, int attackerIndex) {
+    /**
+     * wrapper for a minion attacking enemy hero
+     * checks if action is possible and does the attack, if yes
+     * @param attackerRow the row where attacker card is located
+     * @param attackerIndex the column where attacker card is located
+     * @return an error as String if the action is illegal, null if legal
+     */
+    public static String minionAttackHero(final int attackerRow, final int attackerIndex) {
         Minion attacker = Helpers.getMinionAtPosition(attackerRow, attackerIndex);
 
         if (attacker == null) {
@@ -236,14 +296,20 @@ public class Game {
         }
 
         attacker.attack(Game.getEnemyPlayer().getHero());
-
-        //TODO: check if enemy hero is still alive
-
         return null;
     }
 
-    static public String minionAttack(int attackerRow, int attackerIndex,
-                                      int targetRow, int targetIndex) {
+    /**
+     * wrapper for a minion attacking another minion
+     * checks if action is legal and if yes, does the attack
+     * @param attackerRow row of attacking minion
+     * @param attackerIndex column of attacking minion
+     * @param targetRow row of target minion
+     * @param targetIndex column of target minion
+     * @return an error as String if the action is illegal, null if legal
+     */
+    public static String minionAttack(final int attackerRow, final int attackerIndex,
+                                      final int targetRow, final int targetIndex) {
         Minion attacker = Helpers.getMinionAtPosition(attackerRow, attackerIndex);
         Minion target = Helpers.getMinionAtPosition(targetRow, targetIndex);
 
@@ -274,8 +340,17 @@ public class Game {
         return null;
     }
 
-    static public String minionAbility(int attackerRow, int attackerIndex,
-                                      int targetRow, int targetIndex) {
+    /**
+     * wrapper for a minion using their ability
+     * also checks if action is legal and does it if yes
+     * @param attackerRow row of attacker minion
+     * @param attackerIndex column of attacker minion
+     * @param targetRow row of target minion
+     * @param targetIndex column of target minion
+     * @return an error as String if the action is illegal, null if legal
+     */
+    public static String minionAbility(final int attackerRow, final int attackerIndex,
+                                       final int targetRow, final int targetIndex) {
         Minion attacker = Helpers.getMinionAtPosition(attackerRow, attackerIndex);
         Minion target = Helpers.getMinionAtPosition(targetRow, targetIndex);
 
@@ -306,13 +381,19 @@ public class Game {
             }
         }
 
-        ((Caster)attacker).ability(target);
+        ((Caster) attacker).ability(target);
         removeDeadMinions();
 
         return null;
     }
 
-    public static String useHeroAbility(int targetRow) {
+    /**
+     * wrapper for the hero of current player using their ability
+     * checks if action is legal and executes it if yes
+     * @param targetRow row targeted by hero ability
+     * @return an error as String if the action is illegal, null if legal
+     */
+    public static String useHeroAbility(final int targetRow) {
         Hero hero = Game.getCurrentPlayer().getHero();
 
         if (hero.getMana() > Game.getCurrentPlayer().getMana()) {
@@ -340,7 +421,13 @@ public class Game {
         return null;
     }
 
-    static public void runAction(ActionsInput actionInput, ArrayNode output) {
+    /**
+     * function which processes action in input, calls the corresponding wrapper function
+     * and processes output
+     * @param actionInput object containing action parameters
+     * @param output object where the output of the action is to be placed
+     */
+     public static void runAction(final ActionsInput actionInput, final ArrayNode output) {
         ObjectNode result = Helpers.mapper.createObjectNode();
         result.put("command", actionInput.getCommand());
         switch (actionInput.getCommand()) {
@@ -357,7 +444,8 @@ public class Game {
                 result.put("error", error);
             }
             case "useEnvironmentCard" -> {
-                String error = useEnvironmentCard(actionInput.getHandIdx(), actionInput.getAffectedRow());
+                String error = useEnvironmentCard(actionInput.getHandIdx(),
+                                                  actionInput.getAffectedRow());
                 if (error == null) {
                     return;
                 }
@@ -373,8 +461,10 @@ public class Game {
                 if (error == null) {
                     return;
                 }
-                result.set("cardAttacker", Helpers.coordinatesToJSON(actionInput.getCardAttacker()));
-                result.set("cardAttacked", Helpers.coordinatesToJSON(actionInput.getCardAttacked()));
+                result.set("cardAttacker",
+                           Helpers.coordinatesToJSON(actionInput.getCardAttacker()));
+                result.set("cardAttacked",
+                           Helpers.coordinatesToJSON(actionInput.getCardAttacked()));
                 result.put("error", error);
             }
             case "cardUsesAbility" -> {
@@ -385,8 +475,10 @@ public class Game {
                 if (error == null) {
                     return;
                 }
-                result.set("cardAttacker", Helpers.coordinatesToJSON(actionInput.getCardAttacker()));
-                result.set("cardAttacked", Helpers.coordinatesToJSON(actionInput.getCardAttacked()));
+                result.set("cardAttacker",
+                           Helpers.coordinatesToJSON(actionInput.getCardAttacker()));
+                result.set("cardAttacked",
+                           Helpers.coordinatesToJSON(actionInput.getCardAttacked()));
                 result.put("error", error);
             }
             case "useAttackHero" -> {
@@ -406,7 +498,8 @@ public class Game {
                     }
                     return;
                 }
-                result.set("cardAttacker", Helpers.coordinatesToJSON(actionInput.getCardAttacker()));
+                result.set("cardAttacker",
+                           Helpers.coordinatesToJSON(actionInput.getCardAttacker()));
                 result.put("error", error);
             }
             case "useHeroAbility" -> {

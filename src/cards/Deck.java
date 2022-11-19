@@ -1,6 +1,5 @@
 package cards;
 
-import cards.environments.Environment;
 import cards.minions.Minion;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import helpers.Helpers;
@@ -14,7 +13,7 @@ public class Deck {
         cards = new ArrayList<>();
     }
 
-    public Deck(Deck deck) {
+    public Deck(final Deck deck) {
         cards = new ArrayList<Card>();
 
         for (Card card : deck.getCards()) {
@@ -27,14 +26,18 @@ public class Deck {
         }
     }
 
+    /**
+     *
+     * @return the Array of Cards in current instance
+     */
     public ArrayList<Card> getCards() {
         return cards;
     }
 
-    public void setCards(ArrayList<Card> cards) {
-        this.cards = cards;
-    }
-
+    /**
+     *
+     * @return current Deck as Array of Cards in String format
+     */
     @Override
     public String toString() {
         StringBuilder retString = new StringBuilder("[");
@@ -48,6 +51,11 @@ public class Deck {
         return retString.toString();
     }
 
+    /**
+     *
+     * @return an ArrayNode of Cards in JSON format,
+     * to be used for output
+     */
     public ArrayNode toJSON() {
         ArrayNode deckArray = Helpers.mapper.createArrayNode();
 

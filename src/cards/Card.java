@@ -2,8 +2,6 @@ package cards;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
-import java.util.Arrays;
-
 public abstract class Card {
     private final int mana;
     private final String description;
@@ -20,31 +18,42 @@ public abstract class Card {
         this.name = name;
     }
 
+    /**
+     *
+     * @return mana of current instance of card
+     */
     public int getMana() {
         return mana;
     }
 
+    /**
+     *
+     * @return description of current instance of card
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     *
+     * @return colors of current instance of card
+     */
     public String[] getColors() {
         return colors;
     }
 
+    /**
+     *
+     * @return name of current instance of card
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     *
+     * @return current class instance as an ObjectNode with significant parameters,
+     * to be used for output
+     */
     public abstract ObjectNode toJSON();
-
-    @Override
-    public String toString() {
-        return "{" +
-                "mana: " + mana +
-                ", description: '" + description + '\'' +
-                ", colors: " + Arrays.toString(colors) +
-                ", name: '" + name + '\'' +
-                '}';
-    }
 }
