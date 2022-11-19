@@ -10,6 +10,10 @@ public abstract class Environment extends Card {
         super(mana, description, colors, name);
     }
 
+    public Environment(Environment environment) {
+        super(environment.getMana(), environment.getDescription(), environment.getColors(), environment.getName());
+    }
+
     @Override
     public ObjectNode toJSON() {
         ObjectNode environmentNode = Helpers.mapper.createObjectNode();

@@ -1,5 +1,6 @@
 package cards.minions.casterMinions;
 
+import cards.Card;
 import cards.minions.Caster;
 import cards.minions.Minion;
 
@@ -12,6 +13,16 @@ public class TheCursedOne extends Minion implements Caster {
                     int attackDamage,
                     int prefRow) {
         super(mana, description, colors, name, health, attackDamage, prefRow, false);
+    }
+
+    public TheCursedOne(Minion minion) {
+        super(minion);
+    }
+
+    @Override
+    public Card cloneCard() {
+        TheCursedOne clone = new TheCursedOne(this);
+        return clone;
     }
 
     @Override

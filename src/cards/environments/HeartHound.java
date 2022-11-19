@@ -1,11 +1,22 @@
 package cards.environments;
 
+import cards.Card;
 import cards.minions.Minion;
 import game.Game;
 
 public class HeartHound extends Environment {
     public HeartHound(int mana, String description, String[] colors, String name) {
         super(mana, description, colors, name);
+    }
+
+    public HeartHound(Environment environment) {
+        super(environment);
+    }
+
+    @Override
+    public Card cloneCard() {
+        HeartHound clone = new HeartHound(this);
+        return clone;
     }
 
     @Override

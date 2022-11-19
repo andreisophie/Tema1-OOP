@@ -14,7 +14,6 @@ public abstract class Hero extends Card {
     public Hero(int mana, String description, String[] colors, String name) {
         super(mana, description, colors, name);
     }
-
     abstract public void ability(int targetRow);
 
     public int getHealth() {

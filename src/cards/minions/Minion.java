@@ -33,6 +33,21 @@ public class Minion extends Card {
         this.isTank = isTank;
     }
 
+    public Minion(Minion minion) {
+        super(minion.getMana(), minion.getDescription(), minion.getColors(), minion.getName());
+        this.health = minion.getHealth();
+        this.attackDamage = minion.getAttackDamage();
+        this.prefRow = minion.getPrefRow();
+        this.frozen = false;
+        this.hasAttacked = false;
+        this.isTank = minion.isTank;
+    }
+
+    public Card cloneCard() {
+        Minion clone = new Minion(this);
+        return clone;
+    }
+
     public void attack(Minion target) {
         target.setHealth(target.getHealth() - this.attackDamage);
         this.hasAttacked = true;

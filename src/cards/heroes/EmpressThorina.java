@@ -1,5 +1,6 @@
 package cards.heroes;
 
+import cards.Card;
 import cards.minions.Minion;
 import game.Game;
 

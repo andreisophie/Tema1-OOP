@@ -37,6 +37,9 @@ public abstract class Card {
     }
 
     public abstract ObjectNode toJSON();
+
+    public abstract Card cloneCard();
+
     @Override
     public String toString() {
         return "{" +

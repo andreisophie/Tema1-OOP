@@ -1,5 +1,7 @@
 package cards;
 
+import cards.environments.Environment;
+import cards.minions.Minion;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import helpers.Helpers;
 
@@ -13,7 +15,16 @@ public class Deck {
     }
 
     public Deck(Deck deck) {
-        cards = new ArrayList<Card>(deck.getCards());
+        cards = new ArrayList<Card>();
+
+        for (Card card : deck.getCards()) {
+            if (card instanceof Minion) {
+                cards.add(card.cloneCard());
+            } else {
+                cards.add(card);
+            }
+
+        }
     }
 
     public ArrayList<Card> getCards() {
