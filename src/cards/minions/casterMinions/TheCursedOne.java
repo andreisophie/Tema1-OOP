@@ -15,11 +15,6 @@ public class TheCursedOne extends Minion implements Caster {
     }
 
     @Override
-    public boolean checkTarget(Minion target) {
-        return false;
-    }
-
-    @Override
     public void ability(Minion target) {
         int targetHealth = target.getHealth();
         target.setHealth(target.getAttackDamage());

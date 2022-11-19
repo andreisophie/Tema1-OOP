@@ -9,7 +9,7 @@ public class HeartHound extends Environment {
     }
 
     @Override
-    void ability(int targetRow) {
+    public void ability(int targetRow) {
         int targetIndex = -1;
         int targetHealth = -1;
         int index = -1;

@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5e046a8c-579f-4ca0-a360-d3975cc356e3" name="Changes" comment="Implemented end of turn">
+    <list default="true" id="5e046a8c-579f-4ca0-a360-d3975cc356e3" name="Changes" comment="Fixed tests">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/checkstyle.txt" beforeDir="false" afterPath="$PROJECT_DIR$/checkstyle.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/input/test07_attack_card_invalid.json" beforeDir="false" afterPath="$PROJECT_DIR$/input/test07_attack_card_invalid.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/input/test14_use_hero_ability_2.json" beforeDir="false" afterPath="$PROJECT_DIR$/input/test14_use_hero_ability_2.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cards/environments/Environment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cards/environments/Environment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cards/environments/Firestorm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cards/environments/Firestorm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cards/environments/HeartHound.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cards/environments/HeartHound.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cards/environments/Winterfell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cards/environments/Winterfell.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/cards/minions/Minion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cards/minions/Minion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/helpers/Debug.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/Debug.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helpers/Helpers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/Helpers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,7 +58,7 @@
       <recent name="helpers" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="Application.Test">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="main.Main" />
       <module name="tema" />
@@ -82,8 +87,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main" />
         <item itemvalue="Application.Test" />
+        <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
   </component>
@@ -222,7 +227,21 @@
       <option name="project" value="LOCAL" />
       <updated>1668545305256</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Updated tests">
+      <created>1668854130268</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1668854130268</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Fixed tests">
+      <created>1668854318103</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1668854318103</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -255,6 +274,8 @@
     <MESSAGE value="Refactored helper classes" />
     <MESSAGE value="Fixed shuffle&#10;TEST 1 WORKS NOW!!! &lt;3" />
     <MESSAGE value="Implemented end of turn" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implemented end of turn" />
+    <MESSAGE value="Updated tests" />
+    <MESSAGE value="Fixed tests" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed tests" />
   </component>
 </project>

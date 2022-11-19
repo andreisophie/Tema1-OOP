@@ -27,7 +27,7 @@ public class Minion extends Card {
         this.health = health;
         this.attackDamage = attackDamage;
         this.prefRow = prefRow;
-        this.frozen = true;
+        this.frozen = false;
         this.hasAttacked = false;
         this.isTank = isTank;
     }
@@ -41,7 +41,6 @@ public class Minion extends Card {
             System.out.println("Attacker card has already attacked this turn.");
             return;
         }
-        //TODO: check if card belongs to enemy and tank cards
         target.setHealth(target.getHealth() - this.attackDamage);
         this.hasAttacked = true;
     }

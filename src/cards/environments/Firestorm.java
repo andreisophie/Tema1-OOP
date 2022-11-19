@@ -9,7 +9,7 @@ public class Firestorm extends Environment {
     }
 
     @Override
-    void ability(int targetRow) {
+    public void ability(int targetRow) {
         for (Minion target : Game.playground[targetRow]) {
             target.setHealth(target.getHealth() - 1);
         }

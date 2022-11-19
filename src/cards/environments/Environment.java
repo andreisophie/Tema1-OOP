@@ -26,7 +26,7 @@ public abstract class Environment extends Card {
         return environmentNode;
     }
 
-    abstract void ability(int targetRow);
+    abstract public void ability(int targetRow);
 
 
 }

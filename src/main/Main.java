@@ -78,7 +78,7 @@ public final class Main {
         for (int i = 0; i < inputData.getGames().size(); i++) {
             Game.initializeGame(inputData.getGames().get(i).getStartGame());
             for (int j = 0; j < inputData.getGames().get(i).getActions().size(); j++) {
-                Debug.runAction(inputData.getGames().get(i).getActions().get(j), output);
+                Game.runAction(inputData.getGames().get(i).getActions().get(j), output);
             }
         }
 
