@@ -1,41 +1,47 @@
 package helpers;
 
-import cards.Card;
 import cards.minions.Minion;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import fileio.ActionsInput;
 import game.Game;
-import lombok.experimental.Helper;
 
-public class Debug {
+public final class Debug {
+    private Debug() { }
 
-    static public void runActionDebug(ActionsInput actionInput, ArrayNode output) {
-        ObjectNode result = Helpers.mapper.createObjectNode();
+    /**
+     * function which processes action in input, calls the corresponding helper function
+     * and processes output
+     * @param actionInput object containing action parameters
+     * @param output object where the output is to be written
+     */
+    public static void runActionDebug(final ActionsInput actionInput,
+                                      final ArrayNode output) {
+        ObjectNode result = Constants.getMapper().createObjectNode();
         result.put("command", actionInput.getCommand());
         switch (actionInput.getCommand()) {
             case "getPlayerDeck" -> {
-                result.put("playerIdx", actionInput.getPlayerIdx());
-                result.set("output", Game.getPlayerByIndex(actionInput.getPlayerIdx()).getCurrentDeck().toJSON());
+                final int playerIdx = actionInput.getPlayerIdx();
+                result.put("playerIdx", playerIdx);
+                result.set("output", Helpers.getPlayerByIndex(playerIdx).getCurrentDeck().toJSON());
             }
             case "getPlayerHero" -> {
                 result.put("playerIdx", actionInput.getPlayerIdx());
-                result.set("output", Game.getPlayerByIndex(actionInput.getPlayerIdx()).getHero().toJSON());
+                result.set("output",
+                           Helpers.getPlayerByIndex(actionInput.getPlayerIdx()).getHero().toJSON());
             }
             case "getCardsInHand" -> {
                 result.put("playerIdx", actionInput.getPlayerIdx());
-                result.set("output", Game.getPlayerByIndex(actionInput.getPlayerIdx()).getHand().toJSON());
+                result.set("output",
+                           Helpers.getPlayerByIndex(actionInput.getPlayerIdx()).getHand().toJSON());
             }
-            case "getPlayerTurn" -> result.put("output", Game.currentPlayer);
+            case "getPlayerTurn" -> result.put("output", Game.getCurrentPlayer());
             case "getPlayerMana" -> {
-                result.put("playerIdx", actionInput.getPlayerIdx());
-                result.put("output", Game.getPlayerByIndex(actionInput.getPlayerIdx()).getMana());
+                final int playerIdx = actionInput.getPlayerIdx();
+                result.put("playerIdx", playerIdx);
+                result.put("output", Helpers.getPlayerByIndex(playerIdx).getMana());
             }
-            case "getCardsOnTable" -> {
-                result.set("output", Helpers.playgroundToJSON());
-            }
+            case "getCardsOnTable" -> result.set("output", Helpers.playgroundToJSON());
             case "getEnvironmentCardsInHand" -> {
                 result.put("playerIdx", actionInput.getPlayerIdx());
                 result.set("output", Helpers.environmentCardsInHand(actionInput.getPlayerIdx()));
@@ -50,9 +56,7 @@ public class Debug {
                     result.set("output", minion.toJSON());
                 }
             }
-            case "getFrozenCardsOnTable" -> {
-                result.set("output", Helpers.getFrozenMinions());
-            }
+            case "getFrozenCardsOnTable" -> result.set("output", Helpers.getFrozenMinions());
             default -> {
                 Statistics.runActionStatistics(actionInput, output);
                 return;

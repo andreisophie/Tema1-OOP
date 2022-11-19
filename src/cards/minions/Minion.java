@@ -4,7 +4,7 @@ import cards.Card;
 import cards.heroes.Hero;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import helpers.Helpers;
+import helpers.Constants;
 
 public class Minion extends Card implements Cloneable {
     private int health;
@@ -155,12 +155,12 @@ public class Minion extends Card implements Cloneable {
      * to be used for output
      */
     public ObjectNode toJSON() {
-        ObjectNode minionNode = Helpers.mapper.createObjectNode();
+        ObjectNode minionNode = Constants.getMapper().createObjectNode();
         minionNode.put("mana", getMana());
         minionNode.put("attackDamage", getAttackDamage());
         minionNode.put("health", getHealth());
         minionNode.put("description", getDescription());
-        ArrayNode colorsNode = Helpers.mapper.createArrayNode();
+        ArrayNode colorsNode = Constants.getMapper().createArrayNode();
         for (String color : getColors()) {
             colorsNode.add(color);
         }

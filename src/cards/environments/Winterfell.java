@@ -21,7 +21,7 @@ public class Winterfell extends Environment {
      */
     @Override
     public void ability(final int targetRow) {
-        for (Minion target : Game.playground[targetRow]) {
+        for (Minion target : Game.getPlayground()[targetRow]) {
             target.setFrozen(true);
         }
     }

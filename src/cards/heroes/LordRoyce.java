@@ -17,9 +17,9 @@ public class LordRoyce extends Hero {
      */
     @Override
     public void ability(final int targetRow) {
-        Minion target = Game.playground[targetRow].get(0);
+        Minion target = Game.getPlayground()[targetRow].get(0);
 
-        for (Minion minion : Game.playground[targetRow]) {
+        for (Minion minion : Game.getPlayground()[targetRow]) {
             if (minion.getAttackDamage() > target.getAttackDamage()) {
                 target = minion;
             }

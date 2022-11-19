@@ -25,61 +25,36 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
-public class Game {
-    public static ArrayList<Minion>[] playground = new ArrayList[Constants.maxRowIndex];
-    public static Player player1, player2;
-    public static int currentPlayer;
-    public static int startingPlayer;
-    public static int turnNumber;
+public final class Game {
+    private static ArrayList<Minion>[] playground = new ArrayList[Constants.MAX_ROW_INDEX];
+    private static Player player1, player2;
+    private static int currentPlayer;
+    private static int startingPlayer;
+    private static int turnNumber;
+    private Game() { }
 
-    /**
-     * returns a player object by its index
-     * @param index index of player to be returned
-     * @return player with requested index
-     */
-    public static Player getPlayerByIndex(final int index) {
-        if (index == 1) {
-            return player1;
-        }
+    public static ArrayList<Minion>[] getPlayground() {
+        return playground;
+    }
+
+    public static Player getPlayer1() {
+        return player1;
+    }
+
+    public static Player getPlayer2() {
         return player2;
     }
 
-    /**
-     *
-     * @return Player object currently on their turn
-     */
-    public static Player getCurrentPlayer() {
-        return getPlayerByIndex(currentPlayer);
+    public static int getCurrentPlayer() {
+        return currentPlayer;
     }
 
-    /**
-     * returns the enemy of the player currently on their turn
-     * @return Player object waiting for the enemy's turn
-     */
-    public static Player getEnemyPlayer() {
-        return getPlayerByIndex(1 + currentPlayer % 2);
+    public static int getStartingPlayer() {
+        return startingPlayer;
     }
 
-    /**
-     * returns the row where a minion should be placed
-     * also considers the player currently on their turn
-     * @param minion minion to check for target row
-     * @return index of the row where the minion should be placed
-     */
-    public static int getRowForMinion(final Minion minion) {
-        if (currentPlayer == 1) {
-            if (minion.getPrefRow() == 0) {
-                return Constants.player1_BackRow;
-            } else {
-                return Constants.player1_FrontRow;
-            }
-        } else {
-            if (minion.getPrefRow() == 0) {
-                return Constants.player2_BackRow;
-            } else {
-                return Constants.player2_FrontRow;
-            }
-        }
+    public static int getTurnNumber() {
+        return turnNumber;
     }
 
     /**
@@ -89,27 +64,25 @@ public class Game {
      public static void initializePlayers(final Input inputData) {
         Deck deck;
         // initialize player 1
-        player1 = new Player();
-        player1.setNrDecks(inputData.getPlayerOneDecks().getNrDecks());
-        player1.setNrCardsInDeck(inputData.getPlayerOneDecks().getNrCardsInDeck());
+        player1 = new Player(inputData.getPlayerOneDecks().getNrDecks(),
+                             inputData.getPlayerOneDecks().getNrCardsInDeck());
         for (int i = 0; i < player1.getNrDecks(); i++) {
             deck = new Deck();
             for (int j = 0; j < player1.getNrCardsInDeck(); j++) {
                 CardInput cardInput = inputData.getPlayerOneDecks().getDecks().get(i).get(j);
-                deck.getCards().add(Helpers.CardInputToCard(cardInput));
+                deck.getCards().add(Helpers.cardInputToCard(cardInput));
             }
             player1.addDeck(deck);
         }
         player1.setHand(new Deck());
         // initialize player 2
-        player2 = new Player();
-        player2.setNrDecks(inputData.getPlayerOneDecks().getNrDecks());
-        player2.setNrCardsInDeck(inputData.getPlayerOneDecks().getNrCardsInDeck());
+        player2 = new Player(inputData.getPlayerOneDecks().getNrDecks(),
+                             inputData.getPlayerOneDecks().getNrCardsInDeck());
         for (int i = 0; i < player2.getNrDecks(); i++) {
             deck = new Deck();
             for (int j = 0; j < player2.getNrCardsInDeck(); j++) {
                 CardInput cardInput = inputData.getPlayerTwoDecks().getDecks().get(i).get(j);
-                deck.getCards().add(Helpers.CardInputToCard(cardInput));
+                deck.getCards().add(Helpers.cardInputToCard(cardInput));
             }
             player2.addDeck(deck);
         }
@@ -123,8 +96,8 @@ public class Game {
      * @param startGameInput object which contains data used to initialize match
      */
     public static void initializeGame(final StartGameInput startGameInput) {
-        player1.setHero((Hero) Helpers.CardInputToCard(startGameInput.getPlayerOneHero()));
-        player2.setHero((Hero) Helpers.CardInputToCard(startGameInput.getPlayerTwoHero()));
+        player1.setHero((Hero) Helpers.cardInputToCard(startGameInput.getPlayerOneHero()));
+        player2.setHero((Hero) Helpers.cardInputToCard(startGameInput.getPlayerTwoHero()));
 
         player1.setCurrentDeck(
                 new Deck(player1.getDecks().get(startGameInput.getPlayerOneDeckIdx())));
@@ -142,7 +115,7 @@ public class Game {
         player1.setMana(1);
         player2.setMana(1);
 
-        for (int i = 0; i < Constants.maxRowIndex; i++) {
+        for (int i = 0; i < Constants.MAX_ROW_INDEX; i++) {
             playground[i] = new ArrayList<>();
         }
 
@@ -154,7 +127,7 @@ public class Game {
      * refreshes variables in preparation of next match
      */
     public static void cleanupGame() {
-        for (int i = 0; i < Constants.maxRowIndex; i++) {
+        for (int i = 0; i < Constants.MAX_ROW_INDEX; i++) {
             playground[i].clear();
         }
 
@@ -180,8 +153,10 @@ public class Game {
 
         if (currentPlayer == startingPlayer) {
             turnNumber++;
-            player1.setMana(player1.getMana() + (Math.min(turnNumber, Constants.maxManaPerTurn)));
-            player2.setMana(player2.getMana() + (Math.min(turnNumber, Constants.maxManaPerTurn)));
+            player1.setMana(player1.getMana() + (Math.min(turnNumber,
+                                                          Constants.MAX_MANA_PER_TURN)));
+            player2.setMana(player2.getMana() + (Math.min(turnNumber,
+                                                          Constants.MAX_MANA_PER_TURN)));
             if (player1.getCurrentDeck().getCards().size() > 0) {
                 player1.getHand().getCards().add(player1.getCurrentDeck().getCards().remove(0));
             }
@@ -197,23 +172,24 @@ public class Game {
      * @return an error as String if the action is illegal, null if legal
      */
     public static String placeCard(final int handIndex) {
-        Card card = Game.getCurrentPlayer().getHand().getCards().get(handIndex);
+        Card card = Helpers.getCurrentPlayer().getHand().getCards().get(handIndex);
 
         if (card instanceof Environment) {
             return "Cannot place environment card on table.";
         }
 
-        if (card.getMana() > Game.getCurrentPlayer().getMana()) {
+        if (card.getMana() > Helpers.getCurrentPlayer().getMana()) {
             return "Not enough mana to place card on table.";
         }
 
-        if (Game.playground[getRowForMinion((Minion) card)].size() == Constants.maxMinionsPerRow) {
+        if (Game.playground[Helpers.getRowForMinion((Minion) card)].size()
+                == Constants.MAX_MINIONS_PER_ROW) {
             return "Cannot place card on table since row is full.";
         }
 
-        Game.getCurrentPlayer().setMana(Game.getCurrentPlayer().getMana() - card.getMana());
-        Game.getCurrentPlayer().getHand().getCards().remove(card);
-        Game.playground[getRowForMinion((Minion) card)].add((Minion) card);
+        Helpers.getCurrentPlayer().setMana(Helpers.getCurrentPlayer().getMana() - card.getMana());
+        Helpers.getCurrentPlayer().getHand().getCards().remove(card);
+        Game.playground[Helpers.getRowForMinion((Minion) card)].add((Minion) card);
 
         return null;
     }
@@ -225,13 +201,13 @@ public class Game {
      * @return an error as String if the action is illegal, null if legal
      */
     public static String useEnvironmentCard(final int handIndex, final int targetRow) {
-        Card card = Game.getCurrentPlayer().getHand().getCards().get(handIndex);
+        Card card = Helpers.getCurrentPlayer().getHand().getCards().get(handIndex);
 
         if (!(card instanceof  Environment)) {
             return "Chosen card is not of type environment.";
         }
 
-        if (card.getMana() > Game.getCurrentPlayer().getMana()) {
+        if (card.getMana() > Helpers.getCurrentPlayer().getMana()) {
             return "Not enough mana to use environment card.";
         }
 
@@ -240,32 +216,18 @@ public class Game {
         }
 
         if (card instanceof HeartHound) {
-            if (playground[Helpers.getMirrorRow(targetRow)].size() == Constants.maxMinionsPerRow) {
+            if (playground[Helpers.getMirrorRow(targetRow)].size()
+                    == Constants.MAX_MINIONS_PER_ROW) {
                 return "Cannot steal enemy card since the player's row is full.";
             }
         }
 
         ((Environment) card).ability(targetRow);
-        removeDeadMinions();
-        getCurrentPlayer().getHand().getCards().remove(handIndex);
-        getCurrentPlayer().setMana(Game.getCurrentPlayer().getMana() - card.getMana());
+        Helpers.removeDeadMinions();
+        Helpers.getCurrentPlayer().getHand().getCards().remove(handIndex);
+        Helpers.getCurrentPlayer().setMana(Helpers.getCurrentPlayer().getMana() - card.getMana());
 
         return null;
-    }
-
-    /**
-     * removes dead minions from the playground (with 0 or less HP)
-     */
-     public static void removeDeadMinions() {
-        for (int i = 0; i < Constants.maxRowIndex; i++) {
-            ArrayList<Minion> newRow = new ArrayList<>();
-            for (Minion minion : Game.playground[i]) {
-                if (minion.getHealth() > 0) {
-                    newRow.add(minion);
-                }
-            }
-            Game.playground[i] = newRow;
-        }
     }
 
     /**
@@ -295,7 +257,7 @@ public class Game {
                 return "Attacked card is not of type 'Tank'.";
         }
 
-        attacker.attack(Game.getEnemyPlayer().getHero());
+        attacker.attack(Helpers.getEnemyPlayer().getHero());
         return null;
     }
 
@@ -335,7 +297,7 @@ public class Game {
         }
 
         attacker.attack(target);
-        removeDeadMinions();
+        Helpers.removeDeadMinions();
 
         return null;
     }
@@ -382,7 +344,7 @@ public class Game {
         }
 
         ((Caster) attacker).ability(target);
-        removeDeadMinions();
+        Helpers.removeDeadMinions();
 
         return null;
     }
@@ -394,9 +356,9 @@ public class Game {
      * @return an error as String if the action is illegal, null if legal
      */
     public static String useHeroAbility(final int targetRow) {
-        Hero hero = Game.getCurrentPlayer().getHero();
+        Hero hero = Helpers.getCurrentPlayer().getHero();
 
-        if (hero.getMana() > Game.getCurrentPlayer().getMana()) {
+        if (hero.getMana() > Helpers.getCurrentPlayer().getMana()) {
             return "Not enough mana to use hero's ability.";
         }
 
@@ -415,8 +377,8 @@ public class Game {
         }
 
         hero.ability(targetRow);
-        removeDeadMinions();
-        getCurrentPlayer().setMana(Game.getCurrentPlayer().getMana() - hero.getMana());
+        Helpers.removeDeadMinions();
+        Helpers.getCurrentPlayer().setMana(Helpers.getCurrentPlayer().getMana() - hero.getMana());
 
         return null;
     }
@@ -428,7 +390,7 @@ public class Game {
      * @param output object where the output of the action is to be placed
      */
      public static void runAction(final ActionsInput actionInput, final ArrayNode output) {
-        ObjectNode result = Helpers.mapper.createObjectNode();
+        ObjectNode result = Constants.getMapper().createObjectNode();
         result.put("command", actionInput.getCommand());
         switch (actionInput.getCommand()) {
             case "endPlayerTurn" -> {
@@ -485,15 +447,15 @@ public class Game {
                 String error = minionAttackHero(actionInput.getCardAttacker().getX(),
                         actionInput.getCardAttacker().getY());
                 if (error == null) {
-                    if (Game.getEnemyPlayer().getHero().getHealth() <= 0) {
-                        ObjectNode heroDiedMessage = Helpers.mapper.createObjectNode();
+                    if (Helpers.getEnemyPlayer().getHero().getHealth() <= 0) {
+                        ObjectNode heroDiedMessage = Constants.getMapper().createObjectNode();
                         if (currentPlayer == 1) {
                             heroDiedMessage.put("gameEnded", "Player one killed the enemy hero.");
                         } else {
                             heroDiedMessage.put("gameEnded", "Player two killed the enemy hero.");
                         }
                         output.add(heroDiedMessage);
-                        Game.getCurrentPlayer().incrementWins();
+                        Helpers.getCurrentPlayer().incrementWins();
                         Statistics.incrementGamesPlayed();
                     }
                     return;

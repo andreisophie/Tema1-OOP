@@ -5,24 +5,33 @@ import cards.environments.Environment;
 import cards.environments.Firestorm;
 import cards.environments.HeartHound;
 import cards.environments.Winterfell;
-import cards.heroes.*;
+import cards.heroes.EmpressThorina;
+import cards.heroes.GeneralKocioraw;
+import cards.heroes.KingMudface;
+import cards.heroes.LordRoyce;
 import cards.minions.Minion;
 import cards.minions.casterMinions.Disciple;
 import cards.minions.casterMinions.Miraj;
 import cards.minions.casterMinions.TheCursedOne;
 import cards.minions.casterMinions.TheRipper;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import fileio.*;
+import fileio.CardInput;
+import fileio.Coordinates;
 import game.Game;
+import game.Player;
 
-import java.lang.reflect.Array;
+import java.util.ArrayList;
 
-public class Helpers {
-    static public ObjectMapper mapper = new ObjectMapper();
+public final class Helpers {
+    private Helpers() { }
 
-    static public Card CardInputToCard(CardInput cardInput) {
+    /**
+     * Receives a CardInput object and transaltes into a Card object
+     * @param cardInput object to be converted
+     * @return Card object to be used in game
+     */
+    public static Card cardInputToCard(final CardInput cardInput) {
         return switch (cardInput.getName()) {
             case "Sentinel", "Berserker" -> new Minion(cardInput.getMana(),
                     cardInput.getDescription(),
@@ -100,12 +109,16 @@ public class Helpers {
         };
     }
 
+    /**
+     * returns cards on the playground as a JSON arrayNode of arrayNodes
+     * @return
+     */
     public static ArrayNode playgroundToJSON() {
-        ArrayNode playgroundArray = mapper.createArrayNode();
+        ArrayNode playgroundArray = Constants.getMapper().createArrayNode();
 
-        for (int i = 0; i < 4; i++) {
-            ArrayNode cardsArray = mapper.createArrayNode();
-            for (Minion minion : Game.playground[i]) {
+        for (int i = 0; i < Constants.MAX_ROW_INDEX; i++) {
+            ArrayNode cardsArray = Constants.getMapper().createArrayNode();
+            for (Minion minion : Game.getPlayground()[i]) {
                 cardsArray.add(minion.toJSON());
             }
             playgroundArray.add(cardsArray);
@@ -114,10 +127,16 @@ public class Helpers {
         return playgroundArray;
     }
 
-    public static ArrayNode environmentCardsInHand(int playerIndex) {
-        ArrayNode envArray = Helpers.mapper.createArrayNode();
+    /**
+     * returns environment cards currently held by a player in JSON format,
+     * to be used for output
+     * @param playerIndex player whose cards to be given
+     * @return an ArrayNode containing environment cards held by player
+     */
+    public static ArrayNode environmentCardsInHand(final int playerIndex) {
+        ArrayNode envArray = Constants.getMapper().createArrayNode();
 
-        for (Card card : Game.getPlayerByIndex(playerIndex).getHand().getCards()) {
+        for (Card card : getPlayerByIndex(playerIndex).getHand().getCards()) {
             if (card instanceof Environment) {
                 envArray.add(card.toJSON());
             }
@@ -126,31 +145,54 @@ public class Helpers {
         return envArray;
     }
 
-    public static Minion getMinionAtPosition(int row, int index) {
-        if (Game.playground[row].size() <= index) {
+    /**
+     * returns minion at a given position
+     * @param row row where the minion is located
+     * @param index column where minion is located
+     * @return Minion object with request minion
+     */
+    public static Minion getMinionAtPosition(final int row, final int index) {
+        if (Game.getPlayground()[row].size() <= index) {
             return null;
         }
 
-        return Game.playground[row].get(index);
+        return Game.getPlayground()[row].get(index);
     }
 
-    public static boolean rowBelongsToEnemy(int targetRow) {
-        if (Game.currentPlayer == 1) {
-            return targetRow == 0 || targetRow == 1;
+    /**
+     * returns whether given row belongs to the enemy of the player currently on their turn
+     * @param targetRow index of targeted row
+     * @return true if row belongs to enemy, false if not
+     */
+    public static boolean rowBelongsToEnemy(final int targetRow) {
+        if (Game.getCurrentPlayer() == 1) {
+            return targetRow == Constants.PLAYER_2_BACK_ROW
+                    || targetRow == Constants.PLAYER_2_FRONT_ROW;
         } else {
-            return targetRow == 2 || targetRow == 3;
+            return targetRow == Constants.PLAYER_1_FRONT_ROW
+                    || targetRow == Constants.PLAYER_1_BACK_ROW;
         }
     }
 
-    public static int getMirrorRow(int targetRow) {
-        return 4 - targetRow;
+    /**
+     * returns the mirrored row of a given row
+     * @param targetRow index of targeted row
+     * @return index of mirrored row
+     */
+    public static int getMirrorRow(final int targetRow) {
+        return Constants.MAX_ROW_INDEX - targetRow;
     }
 
+    /**
+     * returns minion currently frozen on the playground in JSON format,
+     * to be used for output
+     * @return ArrayNode containing frozen minions
+     */
     public static ArrayNode getFrozenMinions() {
-        ArrayNode frozenArray = mapper.createArrayNode();
+        ArrayNode frozenArray = Constants.getMapper().createArrayNode();
 
-        for (int i = 0; i < 4; i++) {
-            for (Minion minion : Game.playground[i]) {
+        for (int i = 0; i < Constants.MAX_ROW_INDEX; i++) {
+            for (Minion minion : Game.getPlayground()[i]) {
                 if (minion.isFrozen()) {
                     frozenArray.add(minion.toJSON());
                 }
@@ -160,47 +202,128 @@ public class Helpers {
         return frozenArray;
     }
 
-    public static void unfreezeMinions(int playerIndex) {
+    /**
+     * unfreezes minions of player upon ending their turn
+     * @param playerIndex index of player ending their turn
+     */
+    public static void unfreezeMinions(final int playerIndex) {
         if (playerIndex == 1) {
-            for (int i = 2; i < 4; i++) {
-                Game.playground[i].forEach(minion -> {
+            for (int i = Constants.PLAYER_1_FRONT_ROW; i <= Constants.PLAYER_1_BACK_ROW; i++) {
+                Game.getPlayground()[i].forEach(minion -> {
                     minion.setFrozen(false);
                     minion.setHasAttacked(false);
                 });
             }
-            Game.player1.getHero().setHasAttacked(false);
+            Game.getPlayer1().getHero().setHasAttacked(false);
         }
 
         if (playerIndex == 2) {
-            for (int i = 0; i < 2; i++) {
-                Game.playground[i].forEach(minion -> {
+            for (int i = Constants.PLAYER_2_BACK_ROW; i <= Constants.PLAYER_2_FRONT_ROW; i++) {
+                Game.getPlayground()[i].forEach(minion -> {
                     minion.setFrozen(false);
                     minion.setHasAttacked(false);
                 });
             }
-            Game.player2.getHero().setHasAttacked(false);
+            Game.getPlayer2().getHero().setHasAttacked(false);
         }
     }
 
+    /**
+     * checks whether enemy has a tank on the playground
+     * @return true if enemy has tank, false if not
+     */
     public static boolean enemyHasTank() {
-        if (Game.currentPlayer == 1) {
-            for (Minion minion : Game.playground[1]) {
-                if (minion.isTank())
+        if (Game.getCurrentPlayer() == 1) {
+            for (Minion minion : Game.getPlayground()[Constants.PLAYER_2_FRONT_ROW]) {
+                if (minion.isTank()) {
                     return true;
+                }
             }
         } else {
-            for (Minion minion : Game.playground[2]) {
-                if (minion.isTank())
+            for (Minion minion : Game.getPlayground()[Constants.PLAYER_1_FRONT_ROW]) {
+                if (minion.isTank()) {
                     return true;
+                }
             }
         }
         return false;
     }
 
-    public static ObjectNode coordinatesToJSON(Coordinates cardAttacker) {
-        ObjectNode coordinatesNode = mapper.createObjectNode();
+    /**
+     * translates a coordinates object into JSON format,
+     * to be used for output
+     * @param cardAttacker coordinates to be converted
+     * @return ObjectNode with coordinates
+     */
+    public static ObjectNode coordinatesToJSON(final Coordinates cardAttacker) {
+        ObjectNode coordinatesNode = Constants.getMapper().createObjectNode();
         coordinatesNode.put("x", cardAttacker.getX());
         coordinatesNode.put("y", cardAttacker.getY());
         return coordinatesNode;
+    }
+
+    /**
+     * returns a player object by its index
+     * @param index index of player to be returned
+     * @return player with requested index
+     */
+    public static Player getPlayerByIndex(final int index) {
+        if (index == 1) {
+            return Game.getPlayer1();
+        }
+        return Game.getPlayer2();
+    }
+
+    /**
+     *
+     * @return Player object currently on their turn
+     */
+    public static Player getCurrentPlayer() {
+        return getPlayerByIndex(Game.getCurrentPlayer());
+    }
+
+    /**
+     * returns the enemy of the player currently on their turn
+     * @return Player object waiting for the enemy's turn
+     */
+    public static Player getEnemyPlayer() {
+        return getPlayerByIndex(1 + Game.getCurrentPlayer() % 2);
+    }
+
+    /**
+     * returns the row where a minion should be placed
+     * also considers the player currently on their turn
+     * @param minion minion to check for target row
+     * @return index of the row where the minion should be placed
+     */
+    public static int getRowForMinion(final Minion minion) {
+        if (Game.getCurrentPlayer() == 1) {
+            if (minion.getPrefRow() == 0) {
+                return Constants.PLAYER_1_BACK_ROW;
+            } else {
+                return Constants.PLAYER_1_FRONT_ROW;
+            }
+        } else {
+            if (minion.getPrefRow() == 0) {
+                return Constants.PLAYER_2_BACK_ROW;
+            } else {
+                return Constants.PLAYER_2_FRONT_ROW;
+            }
+        }
+    }
+
+    /**
+     * removes dead minions from the playground (with 0 or less HP)
+     */
+     public static void removeDeadMinions() {
+        for (int i = 0; i < Constants.MAX_ROW_INDEX; i++) {
+            ArrayList<Minion> newRow = new ArrayList<>();
+            for (Minion minion : Game.getPlayground()[i]) {
+                if (minion.getHealth() > 0) {
+                    newRow.add(minion);
+                }
+            }
+            Game.getPlayground()[i] = newRow;
+        }
     }
 }

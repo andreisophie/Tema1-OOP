@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5e046a8c-579f-4ca0-a360-d3975cc356e3" name="Changes" comment="Completed game">
-      <change afterPath="$PROJECT_DIR$/src/helpers/Constants.java" afterDir="false" />
+    <list default="true" id="5e046a8c-579f-4ca0-a360-d3975cc356e3" name="Changes" comment="Refactored classes for coding style">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/checkstyle.txt" beforeDir="false" afterPath="$PROJECT_DIR$/checkstyle.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cards/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cards/Card.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/cards/Deck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cards/Deck.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/cards/environments/Environment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cards/environments/Environment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/cards/environments/Firestorm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cards/environments/Firestorm.java" afterDir="false" />
@@ -16,13 +15,13 @@
       <change beforePath="$PROJECT_DIR$/src/cards/heroes/Hero.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cards/heroes/Hero.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/cards/heroes/KingMudface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cards/heroes/KingMudface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/cards/heroes/LordRoyce.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cards/heroes/LordRoyce.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cards/minions/Caster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cards/minions/Caster.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/cards/minions/Minion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cards/minions/Minion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cards/minions/casterMinions/Disciple.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cards/minions/casterMinions/Disciple.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cards/minions/casterMinions/Miraj.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cards/minions/casterMinions/Miraj.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cards/minions/casterMinions/TheCursedOne.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cards/minions/casterMinions/TheCursedOne.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cards/minions/casterMinions/TheRipper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cards/minions/casterMinions/TheRipper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/game/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helpers/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/Constants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helpers/Debug.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/Debug.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helpers/Helpers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/Helpers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helpers/Statistics.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/Statistics.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,6 +60,8 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveMembersDialog.RECENTS_KEY">
+      <recent name="helpers.Helpers" />
+      <recent name="helpers.Constants" />
       <recent name="game.Debug" />
       <recent name="game.Game" />
     </key>
@@ -293,7 +294,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668881137945</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="Refactored classes for coding style">
+      <created>1668887728163</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1668887728163</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -308,7 +316,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Implemented special minions" />
     <MESSAGE value="Implemented attack for all minions" />
     <MESSAGE value="Implemented Environments" />
     <MESSAGE value="Implemented Heroes" />
@@ -333,6 +340,7 @@
     <MESSAGE value="Implemented full game" />
     <MESSAGE value="Implemented Minion cloning (might delete after refactor)" />
     <MESSAGE value="Completed game" />
-    <option name="LAST_COMMIT_MESSAGE" value="Completed game" />
+    <MESSAGE value="Refactored classes for coding style" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactored classes for coding style" />
   </component>
 </project>

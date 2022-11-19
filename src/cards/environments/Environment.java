@@ -3,7 +3,7 @@ package cards.environments;
 import cards.Card;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import helpers.Helpers;
+import helpers.Constants;
 
 public abstract class Environment extends Card {
     public Environment(final int mana,
@@ -27,11 +27,11 @@ public abstract class Environment extends Card {
      */
     @Override
     public ObjectNode toJSON() {
-        ObjectNode environmentNode = Helpers.mapper.createObjectNode();
+        ObjectNode environmentNode = Constants.getMapper().createObjectNode();
 
         environmentNode.put("mana", getMana());
         environmentNode.put("description", getDescription());
-        ArrayNode colorsNode = Helpers.mapper.createArrayNode();
+        ArrayNode colorsNode = Constants.getMapper().createArrayNode();
         for (String color : getColors()) {
             colorsNode.add(color);
         }

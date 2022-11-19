@@ -21,7 +21,7 @@ public class EmpressThorina extends Hero {
         int targetHealth = -1;
         int index = -1;
 
-        for (Minion target : Game.playground[targetRow]) {
+        for (Minion target : Game.getPlayground()[targetRow]) {
             index++;
             if (target.getHealth() > targetHealth) {
                 targetIndex = index;
@@ -29,7 +29,7 @@ public class EmpressThorina extends Hero {
             }
         }
 
-        Game.playground[targetRow].remove(targetIndex);
+        Game.getPlayground()[targetRow].remove(targetIndex);
         this.setHasAttacked(true);
     }
 }

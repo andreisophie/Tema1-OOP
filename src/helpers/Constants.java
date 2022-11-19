@@ -1,12 +1,25 @@
 package helpers;
 
-public class Constants {
-    static final public int maxRowIndex = 4;
-    static final public int heroMaxHealth = 30;
-    static final public int player1_BackRow = 3;
-    static final public int player1_FrontRow = 2;
-    static final public int player2_BackRow = 0;
-    static final public int player2_FrontRow = 1;
-    static final public int maxManaPerTurn = 10;
-    static final public int maxMinionsPerRow = 5;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+public final class Constants {
+    public static final int MAX_ROW_INDEX = 4;
+    public static final int HERO_MAX_HEALTH = 30;
+    public static final  int PLAYER_1_BACK_ROW = 3;
+    public static final  int PLAYER_1_FRONT_ROW = 2;
+    public static final  int PLAYER_2_BACK_ROW = 0;
+    public static final  int PLAYER_2_FRONT_ROW = 1;
+    public static final  int MAX_MANA_PER_TURN = 10;
+    public static final  int MAX_MINIONS_PER_ROW = 5;
+    private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
+
+    /**
+     * returns mapper to be used in JSON conversion
+     * @return generic ObjectMapper
+     */
+    public static ObjectMapper getMapper() {
+        return OBJECT_MAPPER;
+    }
+
+    private Constants() { }
 }

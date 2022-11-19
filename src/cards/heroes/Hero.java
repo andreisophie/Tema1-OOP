@@ -4,10 +4,9 @@ import cards.Card;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import helpers.Constants;
-import helpers.Helpers;
 
 public abstract class Hero extends Card {
-    private int health = Constants.heroMaxHealth;
+    private int health = Constants.HERO_MAX_HEALTH;
     private boolean hasAttacked = false;
 
     public Hero(final int mana,
@@ -63,11 +62,11 @@ public abstract class Hero extends Card {
      */
     @Override
     public ObjectNode toJSON() {
-        ObjectNode heroNode = Helpers.mapper.createObjectNode();
+        ObjectNode heroNode = Constants.getMapper().createObjectNode();
 
         heroNode.put("mana", getMana());
         heroNode.put("description", getDescription());
-        ArrayNode colorsNode = Helpers.mapper.createArrayNode();
+        ArrayNode colorsNode = Constants.getMapper().createArrayNode();
         for (String color : getColors()) {
             colorsNode.add(color);
         }

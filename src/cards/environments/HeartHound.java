@@ -26,7 +26,7 @@ public class HeartHound extends Environment {
         int targetHealth = -1;
         int index = -1;
 
-        for (Minion target : Game.playground[targetRow]) {
+        for (Minion target : Game.getPlayground()[targetRow]) {
             index++;
             if (target.getHealth() > targetHealth) {
                 targetIndex = index;
@@ -34,7 +34,7 @@ public class HeartHound extends Environment {
             }
         }
 
-        Minion transfer = Game.playground[targetRow].remove(targetIndex);
-        Game.playground[Helpers.getMirrorRow(targetRow)].add(transfer);
+        Minion transfer = Game.getPlayground()[targetRow].remove(targetIndex);
+        Game.getPlayground()[Helpers.getMirrorRow(targetRow)].add(transfer);
     }
 }

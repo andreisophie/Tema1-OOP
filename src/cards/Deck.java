@@ -2,7 +2,7 @@ package cards;
 
 import cards.minions.Minion;
 import com.fasterxml.jackson.databind.node.ArrayNode;
-import helpers.Helpers;
+import helpers.Constants;
 
 import java.util.ArrayList;
 
@@ -57,7 +57,7 @@ public class Deck {
      * to be used for output
      */
     public ArrayNode toJSON() {
-        ArrayNode deckArray = Helpers.mapper.createArrayNode();
+        ArrayNode deckArray = Constants.getMapper().createArrayNode();
 
         for (Card card : cards) {
             deckArray.add(card.toJSON());
