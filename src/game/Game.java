@@ -4,13 +4,13 @@ import cards.Card;
 import cards.Deck;
 import cards.environments.Environment;
 import cards.environments.HeartHound;
+import cards.heroes.EmpressThorina;
 import cards.heroes.Hero;
+import cards.heroes.LordRoyce;
 import cards.minions.Caster;
 import cards.minions.Minion;
 import cards.minions.casterMinions.Disciple;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import fileio.ActionsInput;
 import fileio.CardInput;
@@ -18,7 +18,7 @@ import fileio.Input;
 import fileio.StartGameInput;
 import helpers.Debug;
 import helpers.Helpers;
-import lombok.experimental.Helper;
+import helpers.Statistics;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -39,6 +39,10 @@ public class Game {
 
     public static Player getCurrentPlayer() {
         return getPlayerByIndex(currentPlayer);
+    }
+
+    public static Player getEnemyPlayer() {
+        return getPlayerByIndex(1 + currentPlayer % 2);
     }
 
     public static int getRowForMinion(Minion minion) {
@@ -111,6 +115,21 @@ public class Game {
 
         player1.getHand().getCards().add(player1.getCurrentDeck().getCards().remove(0));
         player2.getHand().getCards().add(player2.getCurrentDeck().getCards().remove(0));
+    }
+
+    static public void cleanupGame() {
+        for (int i = 0; i < 4; i++) {
+            playground[i].clear();
+        }
+
+        player1.getHand().getCards().clear();
+        player2.getHand().getCards().clear();
+
+        player1.getCurrentDeck().getCards().clear();
+        player2.getCurrentDeck().getCards().clear();
+
+        player1.setHero(null);
+        player2.setHero(null);
     }
 
     static public void endTurn() {
@@ -194,8 +213,35 @@ public class Game {
         }
     }
 
+    static public String minionAttackHero(int attackerRow, int attackerIndex) {
+        Minion attacker = Helpers.getMinionAtPosition(attackerRow, attackerIndex);
+
+        if (attacker == null) {
+            System.out.println("Invalid cards for cardUsesAttack command");
+            return null;
+        }
+
+        if (attacker.isFrozen()) {
+            return "Attacker card is frozen.";
+        }
+
+        if (attacker.getHasAttacked()) {
+            return "Attacker card has already attacked this turn.";
+        }
+
+        if (Helpers.enemyHasTank()) {
+                return "Attacked card is not of type 'Tank'.";
+        }
+
+        attacker.attack(Game.getEnemyPlayer().getHero());
+
+        //TODO: check if enemy hero is still alive
+
+        return null;
+    }
+
     static public String minionAttack(int attackerRow, int attackerIndex,
-                                    int targetRow, int targetIndex) {
+                                      int targetRow, int targetIndex) {
         Minion attacker = Helpers.getMinionAtPosition(attackerRow, attackerIndex);
         Minion target = Helpers.getMinionAtPosition(targetRow, targetIndex);
 
@@ -217,7 +263,7 @@ public class Game {
         }
 
         if (Helpers.enemyHasTank() && !target.isTank()) {
-                return "Attacked card is not of type 'Tank'.";
+            return "Attacked card is not of type 'Tank'.";
         }
 
         attacker.attack(target);
@@ -260,6 +306,34 @@ public class Game {
 
         ((Caster)attacker).ability(target);
         removeDeadMinions();
+
+        return null;
+    }
+
+    public static String useHeroAbility(int targetRow) {
+        Hero hero = Game.getCurrentPlayer().getHero();
+
+        if (hero.getMana() > Game.getCurrentPlayer().getMana()) {
+            return "Not enough mana to use hero's ability.";
+        }
+
+        if (hero.hasAttacked()) {
+            return "Hero has already attacked this turn.";
+        }
+
+        if (hero instanceof LordRoyce || hero instanceof EmpressThorina) {
+            if (!Helpers.rowBelongsToEnemy(targetRow)) {
+                return "Selected row does not belong to the enemy.";
+            }
+        } else {
+            if (Helpers.rowBelongsToEnemy(targetRow)) {
+                return "Selected row does not belong to the current player.";
+            }
+        }
+
+        hero.ability(targetRow);
+        removeDeadMinions();
+        getCurrentPlayer().setMana(Game.getCurrentPlayer().getMana() - hero.getMana());
 
         return null;
     }
@@ -311,6 +385,34 @@ public class Game {
                 }
                 result.set("cardAttacker", Helpers.coordinatesToJSON(actionInput.getCardAttacker()));
                 result.set("cardAttacked", Helpers.coordinatesToJSON(actionInput.getCardAttacked()));
+                result.put("error", error);
+            }
+            case "useAttackHero" -> {
+                String error = minionAttackHero(actionInput.getCardAttacker().getX(),
+                        actionInput.getCardAttacker().getY());
+                if (error == null) {
+                    if (Game.getEnemyPlayer().getHero().getHealth() <= 0) {
+                        ObjectNode heroDiedMessage = Helpers.mapper.createObjectNode();
+                        if (currentPlayer == 1) {
+                            heroDiedMessage.put("gameEnded", "Player one killed the enemy hero.");
+                        } else {
+                            heroDiedMessage.put("gameEnded", "Player two killed the enemy hero.");
+                        }
+                        output.add(heroDiedMessage);
+                        Game.getCurrentPlayer().incrementWins();
+                        Statistics.incrementGamesPlayed();
+                    }
+                    return;
+                }
+                result.set("cardAttacker", Helpers.coordinatesToJSON(actionInput.getCardAttacker()));
+                result.put("error", error);
+            }
+            case "useHeroAbility" -> {
+                String error = useHeroAbility(actionInput.getAffectedRow());
+                if (error == null) {
+                    return;
+                }
+                result.put("affectedRow", actionInput.getAffectedRow());
                 result.put("error", error);
             }
             default -> {

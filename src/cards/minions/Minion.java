@@ -1,6 +1,7 @@
 package cards.minions;
 
 import cards.Card;
+import cards.heroes.Hero;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import helpers.Helpers;
@@ -33,6 +34,11 @@ public class Minion extends Card {
     }
 
     public void attack(Minion target) {
+        target.setHealth(target.getHealth() - this.attackDamage);
+        this.hasAttacked = true;
+    }
+
+    public void attack(Hero target) {
         target.setHealth(target.getHealth() - this.attackDamage);
         this.hasAttacked = true;
     }

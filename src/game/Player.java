@@ -13,6 +13,7 @@ public class Player {
     private Deck currentDeck;
     private Deck hand;
     private int mana = 0;
+    private int numberWins = 0;
 
     public Player() {
         decks = new ArrayList<>();
@@ -43,6 +44,14 @@ public class Player {
 
     public void setDecks(ArrayList<Deck> decks) {
         this.decks = decks;
+    }
+
+    public int getNumberWins() {
+        return numberWins;
+    }
+
+    public void incrementWins() {
+        this.numberWins++;
     }
 
     @Override

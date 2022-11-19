@@ -8,9 +8,11 @@ public class KingMudface extends Hero {
     }
 
     @Override
-    void ability(int targetRow) {
+    public void ability(int targetRow) {
         Game.playground[targetRow].forEach(target -> {
             target.setHealth(target.getHealth() + 1);
         });
+
+        this.setHasAttacked(true);
     }
 }

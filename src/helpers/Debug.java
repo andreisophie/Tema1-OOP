@@ -53,7 +53,10 @@ public class Debug {
             case "getFrozenCardsOnTable" -> {
                 result.set("output", Helpers.getFrozenMinions());
             }
-            default -> System.out.println("Action not recognised or implemented");
+            default -> {
+                Statistics.runActionStatistics(actionInput, output);
+                return;
+            }
         }
 
         output.add(result);

@@ -8,9 +8,11 @@ public class GeneralKocioraw extends Hero {
     }
 
     @Override
-    void ability(int targetRow) {
+    public void ability(int targetRow) {
         Game.playground[targetRow].forEach(target -> {
             target.setAttackDamage(target.getAttackDamage() + 1);
         });
+
+        this.setHasAttacked(true);
     }
 }

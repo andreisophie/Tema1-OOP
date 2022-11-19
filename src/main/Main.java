@@ -7,7 +7,6 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import checker.CheckerConstants;
 import fileio.Input;
-import helpers.Debug;
 import game.Game;
 
 import java.io.File;
@@ -80,6 +79,7 @@ public final class Main {
             for (int j = 0; j < inputData.getGames().get(i).getActions().size(); j++) {
                 Game.runAction(inputData.getGames().get(i).getActions().get(j), output);
             }
+            Game.cleanupGame();
         }
 
         //

@@ -168,6 +168,7 @@ public class Helpers {
                     minion.setHasAttacked(false);
                 });
             }
+            Game.player1.getHero().setHasAttacked(false);
         }
 
         if (playerIndex == 2) {
@@ -177,6 +178,7 @@ public class Helpers {
                     minion.setHasAttacked(false);
                 });
             }
+            Game.player2.getHero().setHasAttacked(false);
         }
     }
 

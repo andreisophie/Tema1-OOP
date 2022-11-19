@@ -9,7 +9,7 @@ public class EmpressThorina extends Hero {
     }
 
     @Override
-    void ability(int targetRow) {
+    public void ability(int targetRow) {
         int targetIndex = -1;
         int targetHealth = -1;
         int index = -1;
@@ -23,5 +23,6 @@ public class EmpressThorina extends Hero {
         }
 
         Game.playground[targetRow].remove(targetIndex);
+        this.setHasAttacked(true);
     }
 }
