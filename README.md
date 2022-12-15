@@ -57,4 +57,4 @@ Lucrul hands-on cu principiile POO m-a ajutat mult sa aprofundez cunostiintele a
 
 Am invatat si cum sa folosesc JSON-uri in limbajul Java. Cunosteam deja cum se folosesc aceste obiecte in JavaScript, unde este foarte usor caci clasa de baza Object are deja implementata metoda `toJSON`, fiind un limbaj destintat aplicatiilor web care folosesc JSON-uri pentru comuncarea server-client. In Java insa, lucrul cu JSON-uri este mult mai complicat si am inteles mai bine si cum functioneaza.
 
-Nu in ultimul randuri, am invatat cum sa fac readme misto ca sa prezint tema asta.
+Nu in ultimul randul, am invatat cum sa fac readme misto ca sa prezint tema asta.
