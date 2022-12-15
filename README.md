@@ -1,5 +1,3 @@
-
-
 # Tema POO  - GwentStone
 
 Made by Andrei Mărunțiș
